@@ -17,7 +17,7 @@ const WineSchema = mongoose.Schema({
   rating: {type: Number}
 });
 
-UserSchema.methods.serialize = function() {
+WineSchema.methods.serialize = function() {
   return {
     username: this.username || '',
     varietal: this.varietal || '',
