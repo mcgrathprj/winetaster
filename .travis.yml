@@ -1,2 +1,9 @@
 language: node_js
 node_js: node
+services: mongodb
+deploy:
+  provider: heroku
+  api_key: 5ea52904-10e1-41c7-94f5-36f0dd91df1d
+  app: guarded-mesa-36348
+  on:
+    repo: mcgrathprj/winetaster
