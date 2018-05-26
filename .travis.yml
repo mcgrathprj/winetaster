@@ -3,7 +3,7 @@ node_js: node
 services: mongodb
 deploy:
   provider: heroku
-  api_key: 5ea52904-10e1-41c7-94f5-36f0dd91df1d
+  api_key: db878faa-0f6c-40dd-b126-ced89b78ac27
   app: guarded-mesa-36348
   skip_cleanup: true
   on:
