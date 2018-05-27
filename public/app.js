@@ -46,14 +46,15 @@ function listenforLogin() {
 }
 
 function displayRecentReviews(data) {
+ $(".js-form").css("display","none");
  let i; 
  for (i = 0; i <= data.length; i++) {
   $(".js-recent-reviews").append(`<p><a href="#" onclick="displayFullReview(${data[i].id})">${data[i].wine}</a> -- ${data[i].title}</p>`);
  }
 }
 
-function displayFullReview(data) {
- let thisReview = MOCK_REVIEWS[data];
+function displayFullReview(reviewID) {
+ let thisReview = MOCK_REVIEWS.find(id === 'reviewID');
   $(".js-full-review").append(`<h2>${thisReview.title}</h2><p>${thisReview.text}</p>`);
  }
 
