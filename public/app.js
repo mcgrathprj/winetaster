@@ -48,8 +48,14 @@ function listenforLogin() {
 function displayRecentReviews(data) {
  let i; 
  for (i = 0; i <= data.length; i++) {
-  $(".js-recent-reviews").append(`<p><a href="#" onclick="displayFullReview()">${data[i].wine}</a> -- ${data[i].title}</p>`);
+  $(".js-recent-reviews").append(`<p><a href="#" onclick="displayFullReview(${data[i].id})">${data[i].wine}</a> -- ${data[i].title}</p>`);
  }
 }
+
+function displayFullReview(data) {
+ let thisReview = MOCK_REVIEWS[data];
+  $(".js-full-review").append(`<h2>${thisReview.title}</h2><p>${thisReview.text}</p>`);
+ }
+
 
 listenforLogin();
