@@ -41,12 +41,22 @@ var MOCK_REVIEWS = [
 function listenforLogin() {
   $(".js-form").submit (event => {
     event.preventDefault();
-    displayRecentReviews(MOCK_REVIEWS);
+    loadHomeScreen();
   })
+}
+function loadHomeScreen() {
+  $(".js-form").css("display","none");  
+  $(".js-home-screen").html(
+    `
+    <a href="add.html">Add a New Wine</a><br>
+    <a href="recents.html">See Recent Reviews</a><br>
+    <a href="wines.html">Browse Wines</a>
+    `
+    )
 }
 
 function displayRecentReviews(data) {
- $(".js-form").css("display","none");
+ $(".js-home-screen").css("display","none");
  let i; 
  for (i = 0; i <= data.length; i++) {
   $(".js-recent-reviews").append(`<p><a href="#" onclick="displayFullReview(${data[i].id})">${data[i].wine}</a> -- ${data[i].title}</p>`);
