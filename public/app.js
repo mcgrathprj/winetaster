@@ -49,7 +49,7 @@ function loadHomeScreen() {
   $(".js-home-screen").html(
     `
     <a href="add.html">Add a New Wine</a><br>
-    <a href="recents.html">See Recent Reviews</a><br>
+    <a href="#" onclick="displayRecentReviews(MOCK_REVIEWS)">See Recent Reviews</a><br>
     <a href="wines.html">Browse Wines</a>
     `
     )
