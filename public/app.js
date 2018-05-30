@@ -87,7 +87,7 @@ function loadAddScreen() {
       country: $("input[name='wine-country']").val(),
       rating: $("input[name='wine-rating']").val(), 
       title: $("input[name='headline']").val(),
-      text: $("input[name='wine-review']").val()
+      text: $("input[name='wine-review']" ).val()
     };
     MOCK_REVIEWS.push(newWineReview);
     $(".js-submit-status").html(`<p>Your review of ${newWineReview.wine} has been submitted.</p>`)
