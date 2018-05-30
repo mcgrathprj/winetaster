@@ -29,3 +29,7 @@ button {
   border: 5px solid #04befe;
   margin-left: 25px;
 }
+
+.js-add-new-wine {
+  display: none;
+}

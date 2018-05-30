@@ -39,21 +39,46 @@ var MOCK_REVIEWS = [
   ]
 
 function listenforLogin() {
-  $(".js-form").submit (event => {
+  $(".js-login-form").submit (event => {
     event.preventDefault();
     loadHomeScreen();
   })
 }
+
 function loadHomeScreen() {
-  $(".js-form").css("display","none");  
+  $(".js-login-form").css("display","none");  
   $(".js-home-screen").html(
     `
-    <a href="add.html">Add a New Wine</a><br>
+    <a href="#" onclick="loadAddScreen()">Add a New Wine</a><br>
     <a href="#" onclick="displayRecentReviews(MOCK_REVIEWS)">See Recent Reviews</a><br>
-    <a href="wines.html">Browse Wines</a>
+    <a href="#" onclick="browseWines(MOCK_REVIEWS)">Browse Wines</a>
     `
     )
 }
+
+function loadAddScreen() {
+  $(".js-home-screen").css("display","none");
+  $(".js-add-new-wine").css("display","block")
+}
+
+function listenforNewWines(){
+  $(".js-add-new-wine-form").submit(event => {
+    event.preventDefault();
+    var newWineReview = {
+      wine: "$(input[name='wine-name'].val()",
+      year: "$(input[name='wine-year'].val()",
+      type: "$(input[name='wine-type'].val()",
+      region: "$(input[name='wine-region'].val()",
+      country: "$(input[name='wine-country'].val()",
+      rating: "$(input[name='wine-rating'].val()", 
+      title: "$(input[name='headline'].val()",
+      text: "$(input[name='wine-review'].val()"
+    };
+    MOCK_REVIEWS.push(newWineReview);
+    $(".js-submit-status").html(`Your review of ${newWineReview.wine} has been submitted.`)
+  })
+}
+
 
 function displayRecentReviews(data) {
  $(".js-home-screen").css("display","none");
@@ -67,6 +92,14 @@ function displayFullReview(reviewID) {
  let thisReview = MOCK_REVIEWS.find(id === 'reviewID');
   $(".js-full-review").append(`<h2>${thisReview.title}</h2><p>${thisReview.text}</p>`);
  }
+
+function browseWines(data) {
+ $(".js-home-screen").css("display","none");
+ let i; 
+ for (i = 0; i <= data.length; i++) {
+  $(".js-list-of-wines").append(`<p><a href="#" onclick="displayFullReview(${data[i].id})">${data[i].year} ${data[i].wine}</a></p>`);
+ }
+}
 
 
 listenforLogin();
