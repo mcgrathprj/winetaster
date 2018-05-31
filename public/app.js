@@ -2,15 +2,22 @@
 var MOCK_REVIEWS = [
     {
       wine_id: "0000001",
+      username: "peter",
       wine: "La Rioja Alta Vina Alberdi Reserva",
       year: "2001",
       type: "Rioja",
       region: "Rioja",
       country: "Spain",
-      rating: "3",
-      publishedAt: "1527340947",
-      title: "not bad Rioja",
-      text: "Lorem ipsum dolor sit amet, usu at commodo regione, tation apeirian pertinax cu nec. Et eos senserit mediocrem, erat quodsi melius id mel. Nam ea assum appareat. Nam sumo doming ex, ad nam odio illud oportere, forensibus assueverit inciderint cum in. Ius sale scribentur adversarium ne. Eos ut modus minimum, mutat omnesque vix at, eleifend assueverit nam eu. Cu sit alii ferri, sit assum tractatos ne, vel probo fabulas inimicus ne."
+      reviews: [
+        {
+          review_id: "00005",
+          username: "peter",
+          publishedAt: "1527340947",
+          rating: "3",
+          title: "not bad Rioja",
+          text: "Lorem ipsum dolor sit amet, usu at commodo regione, tation apeirian pertinax cu nec. Et eos senserit mediocrem, erat quodsi melius id mel. Nam ea assum appareat. Nam sumo doming ex, ad nam odio illud oportere, forensibus assueverit inciderint cum in. Ius sale scribentur adversarium ne. Eos ut modus minimum, mutat omnesque vix at, eleifend assueverit nam eu. Cu sit alii ferri, sit assum tractatos ne, vel probo fabulas inimicus ne."         
+        }
+      ]
     },
     {
       wine_id: "000002",
@@ -20,10 +27,16 @@ var MOCK_REVIEWS = [
       type: "Cabernet Sauvignon",
       region: "Paso Robles",
       country: "United States",
-      rating: "4",
-      publishedAt: "1527341306",
-      title: "What a great Paso Robles Cab!",
-      text: "Omnium pertinacia constituam ex usu, reque oblique ex usu, te fastidii volutpat voluptatum sea. Tollit partem nec et, omnes salutatus maiestatis mea te. Docendi intellegam ne vix, nisl equidem gloriatur an eum, exerci scaevola gubergren pri id. Diam graeci inciderint est ea. Ex vix stet animal, ei quem splendide vim, ullum altera his ex."
+      reviews: [
+        {
+          review_id: "00006",
+          username: "peter",
+          rating: "4",
+          publishedAt: "1527341306",
+          title: "What a great Paso Robles Cab!",
+          text: "Omnium pertinacia constituam ex usu, reque oblique ex usu, te fastidii volutpat voluptatum sea. Tollit partem nec et, omnes salutatus maiestatis mea te. Docendi intellegam ne vix, nisl equidem gloriatur an eum, exerci scaevola gubergren pri id. Diam graeci inciderint est ea. Ex vix stet animal, ei quem splendide vim, ullum altera his ex." 
+        }
+      ] 
     },
     {
       wine_id: "000003",
