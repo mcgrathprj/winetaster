@@ -110,7 +110,7 @@ function loadAddScreen() {
 function displayRecentReviews(data) {
   $(".js-home-screen").css("display","none");
   for (let i = 0; i < data.length; i++) {
-    $(".js-recent-reviews").append(`<p><a href="#" onclick="displayFullReview(${data[i].wine_id})">${data[i].wine}</a> -- ${data[i].title}</p>`);
+    $(".js-recent-reviews").append(`<p><a href="#" onclick="displayFullReview(${data[i].wine_id})">${data[i].wine}</a> -- ${data[i].reviews.title}</p>`);
   }
 }
 
