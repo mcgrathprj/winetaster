@@ -90,7 +90,6 @@ function loadAddScreen() {
   $(".js-add-new-wine").css("display","block")
 }
 
-
   $(".js-add-new-wine-form").submit(event => {
     event.preventDefault();
     var newWineReview = {
