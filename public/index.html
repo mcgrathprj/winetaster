@@ -14,44 +14,58 @@
     <p>Rate and learn about wines</p>
   </header> 
   <main role="main">
-    <fieldset>
-      <form class="js-login-form">
-        <label for="username">User Name</label><br>
-        <input type="text" name="username"><br>
-        <label for="password">Password</label><br>
-        <input type="text" name="password"><br><br>
-        <button type="submit" class="login">Current Users, Sign In</button><br><br>
-        <button type="submit" class="new-account">Click Here To Create a Free Account</button>
-      </form>
-    </fieldset>
-    <div class="js-home-screen"></div>
-    <div class="js-add-new-wine">
+    <div class="row">
       <fieldset>
-        <form class="js-add-new-wine-form">
-          <label for="wine-name">Name of Wine</label><br>          
-          <input type="text" name="wine-name"><br>
-          <label for="wine-year">Year</label><br>
-          <input type="text" name="wine-year"><br><br>
-          <label for="wine-type">Type of Wine</label><br>
-          <input type="text" name="wine-type"><br>
-          <label for="wine-country">Country</label><br>
-          <input type="text" name="wine-country"><br>
-          <label for="wine-region">Region</label><br>
-          <input type="text" name="wine-region"><br>
-          <label for="wine-rating">Score</label><br>
-          <input type="text" name="wine-rating"><br>
-          <label for="headline">Headline</label><br>          
-          <input type="text" name="headline"><br>
-          <label for="wine-review">Review</label><br>          
-          <input type="text" name="wine-review"><br>
-          <button type="submit" class="new-review">Add Review</button><br><br>
+        <form class="js-login-form">
+          <label for="username">User Name</label><br>
+          <input type="text" name="username"><br>
+          <label for="password">Password</label><br>
+          <input type="text" name="password"><br><br>
+          <button type="submit" class="login">Current Users, Sign In</button><br><br>
+          <button type="submit" class="new-account">Click Here To Create a Free Account</button>
         </form>
       </fieldset>
     </div>
-    <div class="js-submit-status"></div> 
-    <div class="js-list-of-wines"></div>
-    <div class="js-recent-reviews"></div>
-    <div class="js-full-review"></div>
+    <div class="row">
+      <div class="js-home-screen"></div>
+    </div>
+    <div class="row">
+      <div class="js-add-new-wine">
+        <fieldset>
+          <form class="js-add-new-wine-form">
+            <label for="wine-name">Name of Wine</label><br>          
+            <input type="text" name="wine-name"><br>
+            <label for="wine-year">Year</label><br>
+            <input type="text" name="wine-year"><br><br>
+            <label for="wine-type">Type of Wine</label><br>
+            <input type="text" name="wine-type"><br>
+            <label for="wine-country">Country</label><br>
+            <input type="text" name="wine-country"><br>
+            <label for="wine-region">Region</label><br>
+            <input type="text" name="wine-region"><br>
+            <label for="wine-rating">Score</label><br>
+            <input type="text" name="wine-rating"><br>
+            <label for="headline">Headline</label><br>          
+            <input type="text" name="headline"><br>
+            <label for="wine-review">Review</label><br>          
+            <input type="text" name="wine-review"><br>
+            <button type="submit" class="new-review">Add Review</button><br><br>
+          </form>
+        </fieldset>
+      </div>
+    </div>
+    <div class="row">
+      <div class="js-submit-status"></div>
+    </div>
+    <div class="row">
+      <div class="js-list-of-wines"></div>
+    </div>
+    <div class="row">
+      <div class="js-recent-reviews"></div>
+    </div>
+    <div class="row">
+      <div class="js-full-review"></div>
+    </div>
   </main>
   <script src="app.js"></script>
 </body>

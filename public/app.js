@@ -56,6 +56,7 @@ var MOCK_REVIEWS = [
         },
         {
           review_id: "000004",
+          username: "hubbell",
           publishedAt: "1527341598",
           rating: "1",
           title: "Cheap swill",
@@ -110,7 +111,7 @@ function loadAddScreen() {
 function displayRecentReviews(data) {
   $(".js-home-screen").css("display","none");
   for (let i = 0; i < data.length; i++) {
-    $(".js-recent-reviews").append(`<p><a href="#" onclick="displayFullReview(${data[i].wine_id})">${data[i].wine}</a> -- ${data[i].reviews.title}</p>`);
+    $(".js-recent-reviews").append(`<p><a href="#" onclick="displayFullReview(${data[i].wine_id})">${data[i].wine}</a></p>`);
   }
 }
 

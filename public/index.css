@@ -27,7 +27,13 @@ label, input {
 button {
   background-color: #04befe;
   border: 5px solid #04befe;
-  margin-left: 25px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+input {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .js-add-new-wine {
