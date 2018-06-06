@@ -18,14 +18,6 @@ describe('/api/wine', function () {
   const type = 'exampleType';
   const country = 'exampleCountry';
   const region = 'exampleRegion';
-  const reviews = [
-    {
-      username:"exampleUser",
-      rating: "exampleRating",
-      title: "exampleTitle",
-      text: "example text"
-    }
-  ]
 
   before(function () {
     return runServer(TEST_DATABASE_URL);
@@ -40,3 +32,4 @@ describe('/api/wine', function () {
   afterEach(function () {
     return Wine.remove({});
   });
+})

@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken');
 const config = require('../config');
 const router = express.Router();
 
+const {Wine, Review} = require('./models')
 router.use(bodyParser.json());
 
 const jwtAuth = passport.authenticate('jwt', {session: false});
