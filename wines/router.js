@@ -18,3 +18,25 @@ router.get('/tests', jwtAuth, (req, res) => {
 });
 
 module.exports = {router};
+
+router.get('/wines', (req, res) => {
+  Wine
+    .find()
+    .then(wines =>{
+      res.status(200).json(wines)
+    })
+    .catch(err=> {
+      res.status(500).json({message: "Internal Server Error"});
+    });
+});
+
+router.get('/reviews', (req, res) => {
+  Review
+    .find()
+    .then(reviews =>{
+      res.status(200).json(reviews)
+    })
+    .catch(err=> {
+      res.status(500).json({message: "Internal Server Error"});
+    });
+});
