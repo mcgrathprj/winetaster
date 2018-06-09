@@ -53,3 +53,14 @@ router.post('/wines', (req, res) => {
     })
 });
 
+router.post('/reviews', (req, res) => {
+// TODO data validation here
+  Review
+    .create(req.body)
+    .then(review => {
+      res.status(201).json(review)
+    })
+    .catch(err => {
+      res.status(500).json({message: "Internal Server Error"});
+    })
+});
