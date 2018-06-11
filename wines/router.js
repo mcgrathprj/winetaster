@@ -64,3 +64,14 @@ router.post('/reviews', (req, res) => {
       res.status(500).json({message: "Internal Server Error"});
     })
 });
+
+router.delete('/wines/:id', (req, res) => {
+  Wine
+    .findByIdAndRemove(req.params.id)
+    .then(() => {
+      res.status(204).end()
+    })
+    .catch(err => {
+      res.status(500).json({message: "Internal Server Error"})
+    })
+});
