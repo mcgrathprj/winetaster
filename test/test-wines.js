@@ -39,8 +39,15 @@ describe('/api/review', function () {
   });
 })
 
-describe('api/wines', function() {
+describe('data/wines', function() {
   describe('GET', function() {
+     it('Should return an empty array initially', function () {
+        return chai.request(router).get('/data/wines').then(res => {
+          expect(res).to.have.status(200);
+          expect(res.body).to.be.an('array');
+          expect(res.body).to.have.length(0);
+        });
+      });
     it ('should return an array of wines', function() {
       return Wine.create (
         {
@@ -60,11 +67,33 @@ describe('api/wines', function() {
           region: regionB
         }
       )
+        .then(() => chai.request(router).get('/data/wines'))
+        .then(res => {
+          expect(res).to.have.status(200);
+          expect(res.body).to.be.an('array');
+          expect(res.body).to.have.length(2);
+          expect(res.body[0]).to.equal({
+            username,
+            wine,
+            year,
+            varietal,
+            country,
+            region
+            });
+          expect(res.body[1]).to.equal({
+            username: usernameB,
+            wine: wineB,
+            year: yearB,
+            varietal: varietalB,
+            country: countryB,
+            region: regionB
+            });
+          }); 
     })
   }) 
 });
 
-describe('api/reviews', function() {
+describe('data/reviews', function() {
   describe('GET', function() {
     it ('should return an array of reviews', function() {
       return Review.create (
@@ -83,6 +112,25 @@ describe('api/reviews', function() {
           text: textB
         }
       )
+      .then(() => chai.request(router).get('/data/reviews'))
+      .then(res => {
+        expect(res).to.have.status(200);
+        expect(res.body).to.be.an('array');
+        expect(res.body).to.have.length(2);
+        expect(res.body[0]).to.equal({
+          wine_id,
+          rating,
+          title,
+          text
+          });
+        expect(res.body[1]).to.equal({
+          username: usernameB,
+          wine_id: wine_idB,
+          rating: ratingB,
+          title: titleB,
+          text: textB   
+          });
+        }); 
     })
   }) 
 })
