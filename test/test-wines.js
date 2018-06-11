@@ -5,13 +5,14 @@ const chaiHTTP = require('chai-http');
 
 const { app, runServer, closeServer } = require('../server');
 const { Wine } = require('../wines');
+const { Review } = require('../wines');
 const { TEST_DATABASE_URL } = require('../config');
 
 const expect = chai.expect;
 
 chai.use(chaiHTTP);
 
-describe('/api/wine', function () {
+describe('/data/wine', function () {
   const username = 'exampleUser';
   const wine = 'exampleWine';
   const year = 'exampleYear';
@@ -19,10 +20,10 @@ describe('/api/wine', function () {
   const country = 'exampleCountry';
   const region = 'exampleRegion';
 
-describe('/api/review', function () {
+describe('/data/review', function () {
   const username = 'exampleUser';
   const title = 'exampleTitle';
-  const title = 'exampleText';
+  const text = 'exampleText';
 
   before(function () {
     return runServer(TEST_DATABASE_URL);
