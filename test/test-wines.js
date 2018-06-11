@@ -39,9 +39,9 @@ describe('/api/review', function () {
   });
 })
 
-describe('api/wines', function (){
+describe('api/wines', function() {
   describe('GET', function() {
-    it ('should return an array of wines', function (){
+    it ('should return an array of wines', function() {
       return Wine.create (
           {
             username,
@@ -50,7 +50,7 @@ describe('api/wines', function (){
             varietal,
             country,
             region
-          }
+          },
           {
             username: usernameB,
             wine: wineB,
@@ -74,7 +74,7 @@ describe('api/reviews', function() {
         rating,
         title, 
         text
-      }
+      },
       {
         username: usernameB,
         wine_id: wine_idB,
