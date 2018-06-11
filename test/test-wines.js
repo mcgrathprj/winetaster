@@ -43,23 +43,23 @@ describe('api/wines', function() {
   describe('GET', function() {
     it ('should return an array of wines', function() {
       return Wine.create (
-          {
-            username,
-            wine,
-            year,
-            varietal,
-            country,
-            region
-          },
-          {
-            username: usernameB,
-            wine: wineB,
-            year: yearB,
-            varietal: varietalB,
-            country: countryB,
-            region: regionB
-          }
-        )
+        {
+          username,
+          wine,
+          year,
+          varietal,
+          country,
+          region
+        },
+        {
+          username: usernameB,
+          wine: wineB,
+          year: yearB,
+          varietal: varietalB,
+          country: countryB,
+          region: regionB
+        }
+      )
     })
   }) 
 });
@@ -68,21 +68,21 @@ describe('api/reviews', function() {
   describe('GET', function() {
     it ('should return an array of reviews', function() {
       return Review.create (
-      {
-        username,
-        wine_id,
-        rating,
-        title, 
-        text
-      },
-      {
-        username: usernameB,
-        wine_id: wine_idB,
-        rating: ratingB,
-        title: titleB,
-        text: textB
-      })
-      }
+        {
+          username,
+          wine_id,
+          rating,
+          title, 
+          text
+        },
+        {
+          username: usernameB,
+          wine_id: wine_idB,
+          rating: ratingB,
+          title: titleB,
+          text: textB
+        }
+      )
     })
   }) 
 })
