@@ -40,8 +40,8 @@ const ReviewSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  wine_id: {type: String, default: ''},
-  rating: {type: Number},
+  wine_id: {type: String, required: true},
+  rating: {type: Number, required: true},
   publishedAt: {type: Date, default: Date.now},
   title: {type: String, default: ''},
   text: {type: String, default: ''}

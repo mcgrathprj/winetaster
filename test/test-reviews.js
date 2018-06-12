@@ -78,7 +78,7 @@ describe('/data/review', function () {
               });
             }); 
           })
-        }) 
+        }); 
       });
   });
 });

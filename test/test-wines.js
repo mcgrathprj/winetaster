@@ -13,7 +13,7 @@ chai.use(chaiHTTP);
 
 describe('/data/wine', function () {
   const username = 'exampleUser';
-  const wine = 'exampleWine';
+  const name = 'exampleName';
   const year = 'exampleYear';
   const varietal = 'exampleVarietal';
   const country = 'exampleCountry';
@@ -35,7 +35,7 @@ describe('/data/wine', function () {
   describe('data/wines', function() {
     describe('GET', function() {
        it('Should return an empty array initially', function () {
-          return chai.request(router).get('/data/wines').then(res => {
+          return chai.request(router).get('/data/wines').then(res => {  s
             expect(res).to.have.status(200);
             expect(res.body).to.be.an('array');
             expect(res.body).to.have.length(0);
@@ -45,7 +45,7 @@ describe('/data/wine', function () {
         return Wine.create (
           {
             username,
-            wine,
+            name,
             year,
             varietal,
             country,
@@ -53,7 +53,7 @@ describe('/data/wine', function () {
           },
           {
             username: usernameB,
-            wine: wineB,
+            name: nameB,
             year: yearB,
             varietal: varietalB,
             country: countryB,
@@ -67,7 +67,7 @@ describe('/data/wine', function () {
             expect(res.body).to.have.length(2);
             expect(res.body[0]).to.equal({
               username,
-              wine,
+              name,
               year,
               varietal,
               country,
@@ -75,7 +75,7 @@ describe('/data/wine', function () {
               });
             expect(res.body[1]).to.equal({
               username: usernameB,
-              wine: wineB,
+              name: nameB,
               year: yearB,
               varietal: varietalB,
               country: countryB,
@@ -86,5 +86,75 @@ describe('/data/wine', function () {
         }) 
       });
   });
+  describe ('/data/wines', function() {
+    describe ('POST', function() {
+      it('should reject wines with missing wine name', function() {
+        return chai.request(app).post('data/wines')
+        .send({
+          username,
+          year,
+          varietal,
+          country,
+          region
+        })
+        .then (() => 
+          expect.fail(null, null, 'Request should not succeed')
+        )
+        .catch(err => {
+          if (err instanceof chai.AssertionError) {
+            throw err;
+          }
+          
+          const res = err.response;
+          expect(res).to.have.status(422);
+          expect(res.body.reason).to.equal('ValidationError');
+          expect(res.body.message).to.equal('Missing field');
+          expect(res.body.location).to.equal('name');
+
+        })
+      })
+
+      it('should reject wines with missing username', function() {
+        return chai.request(app).post('data/wines')
+        .send({
+          name,
+          year,
+          varietal,
+          country,
+          region
+        })
+        .then (() => 
+          expect.fail(null, null, 'Request should not succeed')
+        )
+        .catch(err => {
+          if (err instanceof chai.AssertionError) {
+            throw err;
+          }
+          
+          const res = err.response;
+          expect(res).to.have.status(422);
+          expect(res.body.reason).to.equal('ValidationError');
+          expect(res.body.message).to.equal('Missing field');
+          expect(res.body.location).to.equal('username');
+
+        })
+      })
+    })
+  })
+  describe ('/data/wines', function() {
+    describe ('DELETE', function() {
+      it ('should delete items', function() {
+        return chai.request(app)
+        .get('/data/wines')
+        .then(function(res) {
+        return chai.request(app)
+        .delete(`/data/wines/${res.body[0].id}`);
+        })
+      .then(function(res) {
+        expect(res).to.have.status(204);
+        });
+      })
+    })
+  })
 });
 
