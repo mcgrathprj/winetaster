@@ -42,15 +42,15 @@ router.get('/reviews', (req, res) => {
 });
 
 router.post('/wines', (req, res) => {
-  const requiredFields = ['wine', 'username'];
+  const requiredFields = ['name', 'username'];
   for (let i = 0; i < requiredFields.length; i++) {
     const field = requiredFields[i];
     if (!(field in req.body)) {
       const message = `Missing \`${field}\` in request body`;
       console.error(message);
       return res.status(400).send(message)
-      }
-    }; 
+    }
+  }; 
 
   Wine
     .create(req.body)
@@ -63,7 +63,16 @@ router.post('/wines', (req, res) => {
 });
 
 router.post('/reviews', (req, res) => {
-// TODO data validation here
+  const requiredFields = ['wine_id', 'rating', 'username'];
+  for (let i = 0; i < requiredFields.length; i++) {
+    const field = requiredFields[i];
+    if (!(field in req.body)) {
+      const message = `Missing \`${field}\` in request body`;
+      console.error(message);
+      return res.status(400).send(message)
+      }
+    }; 
+
   Review
     .create(req.body)
     .then(review => {

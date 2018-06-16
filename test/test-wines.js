@@ -35,7 +35,9 @@ describe('/data/wine', function () {
   describe('data/wines', function() {
     describe('GET', function() {
        it('Should return an empty array initially', function () {
-          return chai.request(router).get('/data/wines').then(res => {  s
+          return chai.request(app)
+          .get('/data/wines')
+          .then(res => { 
             expect(res).to.have.status(200);
             expect(res.body).to.be.an('array');
             expect(res.body).to.have.length(0);
@@ -60,7 +62,8 @@ describe('/data/wine', function () {
             region: regionB
           }
         )
-          .then(() => chai.request(router).get('/data/wines'))
+          .then(() => chai.request(app)
+            .get('/data/wines'))
           .then(res => {
             expect(res).to.have.status(200);
             expect(res.body).to.be.an('array');
@@ -86,22 +89,24 @@ describe('/data/wine', function () {
         }) 
       });
   });
-  // describe ('/data/wines', function() {
-  //   describe ('POST', function() {
-  //     it('should reject wines with missing wine name', function() {
-  //       return chai.request(app)
-  //       .post('data/wines')
-  //       .send({
-  //         username,
-  //         year,
-  //         varietal,
-  //         country,
-  //         region
-  //       })
-  //       .then ((res) => { 
-  //         expect(res).to.have.status(500)
-  //       })
-  //     })
+  describe ('POST /data/wines', function() {
+//    describe ('POST', function() {
+      let wine = {
+          username,
+          year,
+          varietal,
+          country,
+          region
+        };
+      it('should reject wines with missing wine name', function() {
+        return chai.request(app)
+        .post('/data/wines')
+        .send(wine)
+        .then (res => { 
+          expect(res).to.have.status(400)
+        })
+      })
+    })
 
       // it('should reject wines with missing username', function() {
       //   return chai.request(app)
@@ -122,7 +127,7 @@ describe('/data/wine', function () {
       //     }
           
       //     const res = err.response;
-      //     expect(res).to.have.status(422);
+      //     expect(res).to.have.status(400);
       //     expect(res.body.reason).to.equal('ValidationError');
       //     expect(res.body.message).to.equal('Missing field');
       //     expect(res.body.location).to.equal('username');
@@ -156,4 +161,3 @@ describe('/data/wine', function () {
     })
   //})
 });
-
