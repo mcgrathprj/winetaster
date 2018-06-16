@@ -42,7 +42,16 @@ router.get('/reviews', (req, res) => {
 });
 
 router.post('/wines', (req, res) => {
-// TODO data validation here
+  const requiredFields = ['wine', 'username'];
+  for (let i = 0; i < requiredFields.length; i++) {
+    const field = requiredFields[i];
+    if (!(field in req.body)) {
+      const message = `Missing \`${field}\` in request body`;
+      console.error(message);
+      return res.status(400).send(message)
+      }
+    }; 
+
   Wine
     .create(req.body)
     .then(wine => {
@@ -50,7 +59,7 @@ router.post('/wines', (req, res) => {
     })
     .catch(err => {
       res.status(500).json({message: "Internal Server Error"});
-    })
+    });
 });
 
 router.post('/reviews', (req, res) => {
