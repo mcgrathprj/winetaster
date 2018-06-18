@@ -89,51 +89,24 @@ describe('/data/wine', function () {
         }) 
       });
   });
-  describe ('POST /data/wines', function() {
+//   describe ('POST /data/wines', function() {
 //    describe ('POST', function() {
-      let wine = {
-          username,
-          year,
-          varietal,
-          country,
-          region
-        };
-      it('should reject wines with missing wine name', function() {
-        return chai.request(app)
-        .post('/data/wines')
-        .send(wine)
-        .then (res => { 
-          expect(res).to.have.status(400)
-        })
-      })
-    })
-
-      // it('should reject wines with missing username', function() {
-      //   return chai.request(app)
-      //   .post('data/wines')
-      //   .send({
-      //     name,
-      //     year,
-      //     varietal,
-      //     country,
-      //     region
-      //   })
-      //   .then (() => 
-      //     expect.fail(null, null, 'Request should not succeed')
-      //   )
-      //   .catch(err => {
-      //     if (err instanceof chai.AssertionError) {
-      //       throw err;
-      //     }
-          
-      //     const res = err.response;
-      //     expect(res).to.have.status(400);
-      //     expect(res.body.reason).to.equal('ValidationError');
-      //     expect(res.body.message).to.equal('Missing field');
-      //     expect(res.body.location).to.equal('username');
-
-      //   })
-      // })
+//       let wine = {
+//           username,
+//           year,
+//           varietal,
+//           country,
+//           region
+//         };
+//       it('should reject wines with missing wine name', function() {
+//         return chai.request(app)
+//         .post('/data/wines')
+//         .send(wine)
+//         .then (res => { 
+//           expect(res).to.have.status(400)
+//         })
+//       })
+//     })
 
   describe ('/data/wines', function() {
 //    describe ('DELETE', function() {
