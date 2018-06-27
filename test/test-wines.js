@@ -89,27 +89,25 @@ describe('/data/wine', function () {
         }) 
       });
   });
-//   describe ('POST /data/wines', function() {
-//    describe ('POST', function() {
-//       let wine = {
-//           username,
-//           year,
-//           varietal,
-//           country,
-//           region
-//         };
-//       it('should reject wines with missing wine name', function() {
-//         return chai.request(app)
-//         .post('/data/wines')
-//         .send(wine)
-//         .then (res => { 
-//           expect(res).to.have.status(400)
-//         })
-//       })
-//     })
+  // describe ('POST /data/wines', function() {
+  //     it('should reject wines with missing wine name', function() {
+  //       let wine = {
+  //         name,
+  //         year,
+  //         varietal,
+  //         country,
+  //         region
+  //       };
+  //       return chai.request(app)
+  //       .post('/data/wines')
+  //       .send(wine)
+  //       .then (res => { 
+  //         expect(res).to.have.status(400)
+  //       })
+  //     })
+  //   })
 
-  describe ('/data/wines', function() {
-//    describe ('DELETE', function() {
+  describe ('/data/wines DELETE', function() {
       it ('should delete items', function() {
         return Wine.create (
           {
@@ -132,5 +130,4 @@ describe('/data/wine', function () {
         });
       })
     })
-  //})
 });

@@ -79,6 +79,11 @@ function listenforLogin() {
   })
 }
 
+function newUser() {
+  
+}
+
+
 function loadHomeScreen() {
   $(".js-login-form").css("display","none");  
   $(".js-home-screen").css("display","block");
