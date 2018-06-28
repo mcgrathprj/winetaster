@@ -20,8 +20,8 @@ var MOCK_WINES = [
     varietal: "Cabernet Sauvignon",
     region: "Paso Robles",
     country: "United States"
-    },
-    {
+  },
+  {
     wine_id: "000003",
     publishedAt: "1527341572",
     username: "peter",
@@ -51,7 +51,7 @@ var MOCK_REVIEWS = [
       publishedAt: "1527341306",
       title: "What a great Paso Robles Cab!",
       text: "Omnium pertinacia constituam ex usu, reque oblique ex usu, te fastidii volutpat voluptatum sea. Tollit partem nec et, omnes salutatus maiestatis mea te. Docendi intellegam ne vix, nisl equidem gloriatur an eum, exerci scaevola gubergren pri id. Diam graeci inciderint est ea. Ex vix stet animal, ei quem splendide vim, ullum altera his ex." 
-        },
+    },
     {
       review_id: "000003",
       wine_id: "000003",
@@ -60,7 +60,7 @@ var MOCK_REVIEWS = [
       rating: "4",
       title: "Pretty good for a white",
       text: "His no moderatius disputationi, ut ubique nonumes pro. Ex clita dicant accusam vim, eos ut facer elitr tollit. Hinc animal option eu eos, mutat regione delenit an sed. In accusam adipisci mel. Ut quo cibo sanctus meliore. Ea mollis elaboraret vis, bonorum recusabo duo in. Vis at laboramus expetendis."
-        },
+    },
     {
       review_id: "000004",
       wine_id: "000003",
@@ -105,7 +105,7 @@ function loadAddScreen() {
   $(".js-add-new-wine-form").submit(event => {
     event.preventDefault();
     var newWineEntry = {
-      wine: $("input[name='wine-name']").val(),
+      name: $("input[name='wine-name']").val(),
       year: $("input[name='wine-year']").val(),
       varietal: $("input[name='wine-varietal']").val(),
       region: $("input[name='wine-region']").val(),
@@ -117,8 +117,13 @@ function loadAddScreen() {
       text: $("input[name='wine-review']" ).val()
     };
 
-    MOCK_REVIEWS.push(newWineReview);
-    MOCK_WINES.push(newWineEntry);
+    // MOCK_REVIEWS.push(newWineReview);
+    // MOCK_WINES.push(newWineEntry);
+
+    postNewWine(newWineEntry);
+    postNewReview(newWineReview);
+
+
     $(".js-add-new-wine").css("display","none");
     $(".js-submit-status").css("display","block");
     $(".js-submit-status").html(
@@ -131,6 +136,44 @@ function loadAddScreen() {
       `
       )
   })
+
+function postNewWine(wine) {
+  let token = localStorage.getItem("authToken");
+  $.ajax({
+    url: '/data/wines',
+    type: 'POST',
+    data: JSON.stringify(wine),
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token
+    }
+  })
+  .done(data => {
+    console.log(data)
+  })
+  .fail(err => {
+    console.log(err)
+  })
+}
+
+function postNewReview(review) {
+  let token = localStorage.getItem("authToken");
+  $.ajax({
+    url: '/data/wines',
+    type: 'POST',
+    data: JSON.stringify(review),
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token
+    }
+  })
+  .done(data => {
+    console.log(data)
+  })
+  .fail(err => {
+    console.log(err)
+  })
+}
 
 
 function displayRecentReviews(data) {
