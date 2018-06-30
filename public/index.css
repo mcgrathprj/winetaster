@@ -1,9 +1,10 @@
 body {
   font-family: 'Fira Sans', sans-serif;
+  height: 100%; 
+  background-image: url("cheers-.jpg");
 }
-header {
-  text-align: center;
-  background: linear-gradient(to right, #fa709a 0%, #fee140 100%);
+header, h2, h3 {
+  text-align: center
 }
 
 fieldset {
@@ -17,6 +18,14 @@ legend {
   font-size: 200%;
   margin-bottom: 25px;
   margin-top: 25px;
+}
+
+.login-page {
+  display: block; 
+  background-color: white;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 label, input {
@@ -33,6 +42,15 @@ button {
 input {
   margin-left: auto;
   margin-right: auto;
+}
+
+a:link {
+  color: #0157ae;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
 }
 
 .js-add-new-wine {

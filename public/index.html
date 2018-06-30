@@ -10,21 +10,24 @@
 </head>
 <body>
   <header role="banner">
-    <h1>Welcome to Wine Taster</h1>
-    <p>Rate and learn about wines</p>
+    <h1>Wine Taster</h1>
   </header> 
   <main role="main">
     <div class="row">
-      <fieldset>
-        <form class="js-login-form">
-          <label for="username">User Name</label><br>
-          <input type="text" name="username"><br>
-          <label for="password">Password</label><br>
-          <input type="text" name="password"><br><br>
-          <button type="submit" class="login">Current Users, Sign In</button><br><br>
-          <button type="submit" class="new-account">Click Here To Create a Free Account</button>
-        </form>
-      </fieldset>
+      <div class="login-page">
+        <h2>Welcome to Wine Taster!</h2>
+        <h3>Rate and Learn about Wines</h3>
+        <fieldset>
+          <form class="js-login-form">
+            <label for="username">User Name</label><br>
+            <input type="text" name="username"><br>
+            <label for="password">Password</label><br>
+            <input type="text" name="password"><br><br>
+            <button type="submit" class="login">Current Users, Sign In</button><br><br>
+            <p class="new-account"><a href="#">Not Registered? Click Here To Create a Free Account</a></p>
+          </form>
+        </fieldset>
+      </div>
     </div>
     <div class="row">
       <div class="js-home-screen"></div>
