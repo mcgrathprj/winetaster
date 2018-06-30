@@ -85,7 +85,8 @@ function newUser() {
 
 
 function loadHomeScreen() {
-  $(".js-login-form").css("display","none");  
+  $(".login-page").css("display","none"); 
+  $("body").css("background-image","none"); 
   $(".js-home-screen").css("display","block");
   $(".js-submit-status").css("display", "none");
   $(".js-home-screen").html(

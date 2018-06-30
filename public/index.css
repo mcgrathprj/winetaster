@@ -3,7 +3,7 @@ body {
   height: 100%; 
   background-image: url("cheers-.jpg");
 }
-header, h2, h3 {
+header, h2, h3, form {
   text-align: center
 }
 
@@ -26,6 +26,10 @@ legend {
   max-width: 400px;
   margin-left: auto;
   margin-right: auto;
+}
+
+h2 {
+  padding-top: 20px;
 }
 
 label, input {
