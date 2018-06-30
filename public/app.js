@@ -79,9 +79,26 @@ function listenforLogin() {
   })
 }
 
-function newUser() {
-  
-}
+function loadNewUserScreen() {
+  $(".new-account").submit(event => {
+    event.preventDefault();
+    $(".js-login-form").css("display", "none");
+    $(.js-create-account-form).css("display", "block")
+    })
+  }
+
+
+function createNewUser() {
+  $(".js-create-account-form").submit(event => {
+    event.preventDefault();
+    var newUser = {
+      username: $("input[name='username']").val(),
+      firstName: $("input[name='firstName'").val(),
+      lastName: $("input[name='lastName']").val(),
+      password: $(".input[name='password'").val()
+    }
+    })
+  }
 
 
 function loadHomeScreen() {

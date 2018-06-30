@@ -35,6 +35,6 @@ input {
   margin-right: auto;
 }
 
-.js-add-new-wine {
+.js-add-new-wine, .js-create-account-form {
   display: none;
 }
