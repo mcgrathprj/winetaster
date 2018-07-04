@@ -97,8 +97,13 @@ function createNewUser() {
       lastName: $("input[name='lastName']").val(),
       password: $(".input[name='password'").val()
     }
+   postNewUser(newUser) 
     })
   }
+
+function postNewUser(data) {
+  
+}
 
 
 function loadHomeScreen() {
@@ -133,9 +138,6 @@ function loadAddScreen() {
       title: $("input[name='headline']").val(),
       text: $("input[name='wine-review']" ).val()
     };
-
-    // MOCK_REVIEWS.push(newWineReview);
-    // MOCK_WINES.push(newWineEntry);
 
     postNewWine(newWineEntry);
     postNewReview(newWineReview);
