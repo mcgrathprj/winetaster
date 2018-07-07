@@ -110,27 +110,22 @@ function logInUser(user) {
   });  
 }
 
-function loadNewUserScreen() {
-  $(".new-account").submit(event => {
-    event.preventDefault();
-    $(".js-login-form").css("display", "none");
-    $(.js-create-account-form).css("display", "block")
-    })
-  }
+$("#new-account").click(event => {
+  event.preventDefault();
+  $(".js-login-form").css("display", "none");
+  $(".js-create-account-form").css("display", "block")
+})
 
-
-function createNewUser() {
-  $(".js-create-account-form").submit(event => {
-    event.preventDefault();
-    var newUser = {
-      username: $("input[name='username']").val(),
-      firstName: $("input[name='firstName'").val(),
-      lastName: $("input[name='lastName']").val(),
-      password: $(".input[name='password'").val()
-    }
-   postNewUser(newUser) 
-    })
+$(".js-create-account-form").submit(event => {
+  event.preventDefault();
+  var newUser = {
+    username: $("input[name='requestedUsername']").val(),
+    firstName: $("input[name='firstName']").val(),
+    lastName: $("input[name='lastName']").val(),
+    password: $("input[name='requestedPassword']").val()
   }
+  postNewUser(newUser) 
+})
 
 function postNewUser(user) {
   let username = user.username;
@@ -138,15 +133,15 @@ function postNewUser(user) {
   $.ajax({
     url: "/api/users",
     type: "post",
-    data: "json.stringify(user)",
+    data: JSON.stringify(user),
     headers: {
       "Content-Type": "application/json"
     }
   })
-
   .done(function (data) {
-    loadHomeScreen();
-    })
+      $(".js-login-form").show();  
+      $(".js-create-account-form").hide();    
+  })
   .fail(function (err) {
     if (password.length < 10) {
       $(".errors-area").html("<h2>Password must be at least 10 characters.</h2>")
@@ -154,10 +149,8 @@ function postNewUser(user) {
     if (err.responseJSON.location === "username") {
       $(".errors-area").html(`<h2>${err.responseJSON.message}. Please try a different username.</h2>`)
     }
-    })
-
-  }
-
+  })
+}
 
 function loadHomeScreen() {
   $(".js-login-form").css("display","none");  
