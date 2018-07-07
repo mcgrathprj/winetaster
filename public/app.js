@@ -101,8 +101,17 @@ function createNewUser() {
     })
   }
 
-function postNewUser(data) {
-  
+function postNewUser(user) {
+  let username = user.username;
+  let password = user.password;
+ $.ajax({
+  url: "/users",
+  type: "post",
+  data: "json.stringify(user)",
+  headers: {
+    "Content-Type": "application/json"
+  }
+ }) 
 }
 
 
