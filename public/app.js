@@ -75,8 +75,38 @@ var MOCK_REVIEWS = [
 function listenforLogin() {
   $(".js-login-form").submit (event => {
     event.preventDefault();
-    loadHomeScreen();
+    //loadHomeScreen();
+    const existingUser = {
+      username: $("input[name='username']").val(),
+      password: $("input[name='password']").val()
+    }
+
+    logInUser(existingUser);
+
   })
+}
+
+function logInUser(user) {
+  let password = user.password; 
+  let username = user.username;
+  $.ajax({
+    url: "api/auth/login",
+    type: "POST",
+    data: JSON.stringify(user),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+    .done(token => {
+    localStorage.setItem("authToken", token.authToken);
+    localStorage.setItem("currentUser", username);
+    })
+    .fail(function (err) {
+    console.log(err);
+    if (err.status === 401) {
+      $('.errors-area').html('Username and/or password incorrect');
+    }
+  });  
 }
 
 function loadNewUserScreen() {
@@ -105,7 +135,7 @@ function postNewUser(user) {
   let username = user.username;
   let password = user.password;
  $.ajax({
-  url: "/users",
+  url: "/api/users",
   type: "post",
   data: "json.stringify(user)",
   headers: {
