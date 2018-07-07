@@ -100,6 +100,7 @@ function logInUser(user) {
     .done(token => {
     localStorage.setItem("authToken", token.authToken);
     localStorage.setItem("currentUser", username);
+    loadHomeScreen();
     })
     .fail(function (err) {
     console.log(err);
@@ -134,15 +135,28 @@ function createNewUser() {
 function postNewUser(user) {
   let username = user.username;
   let password = user.password;
- $.ajax({
-  url: "/api/users",
-  type: "post",
-  data: "json.stringify(user)",
-  headers: {
-    "Content-Type": "application/json"
+  $.ajax({
+    url: "/api/users",
+    type: "post",
+    data: "json.stringify(user)",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+
+  .done(function (data) {
+    loadHomeScreen();
+    })
+  .fail(function (err) {
+    if (password.length < 10) {
+      $(".errors-area").html("<h2>Password must be at least 10 characters.</h2>")
+    }
+    if (err.responseJSON.location === "username") {
+      $(".errors-area").html(`<h2>${err.responseJSON.message}. Please try a different username.</h2>`)
+    }
+    })
+
   }
- }) 
-}
 
 
 function loadHomeScreen() {
