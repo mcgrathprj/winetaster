@@ -97,12 +97,12 @@ function logInUser(user) {
       "Content-Type": "application/json"
     }
   })
-    .done(token => {
+  .done(token => {
     localStorage.setItem("authToken", token.authToken);
-    localStorage.setItem("currentUser", username);
+    localStorage.setItem("username", username);
     loadHomeScreen();
-    })
-    .fail(function (err) {
+  })
+  .fail(function (err) {
     console.log(err);
     if (err.status === 401) {
       $('.errors-area').html('Username and/or password incorrect');
@@ -139,8 +139,8 @@ function postNewUser(user) {
     }
   })
   .done(function (data) {
-      $(".js-login-form").show();  
-      $(".js-create-account-form").hide();    
+    $(".js-login-form").show();  
+    $(".js-create-account-form").hide();    
   })
   .fail(function (err) {
     if (password.length < 10) {
@@ -185,9 +185,7 @@ function loadAddScreen() {
       text: $("input[name='wine-review']" ).val()
     };
 
-    postNewWine(newWineEntry);
-    postNewReview(newWineReview);
-
+    postNewWine(newWineEntry, newWineReview);
 
     $(".js-add-new-wine").css("display","none");
     $(".js-submit-status").css("display","block");
@@ -199,11 +197,14 @@ function loadAddScreen() {
       <p>Review: ${newWineReview.text}</p>
       <button onclick="loadHomeScreen()">Back to Home Screen</button>
       `
-      )
+    )
   })
 
-function postNewWine(wine) {
+function postNewWine(wine, review) {
   let token = localStorage.getItem("authToken");
+  let username = localStorage.getItem("username");
+  wine.username = username;
+  review.username = username;
   $.ajax({
     url: '/data/wines',
     type: 'POST',
@@ -215,6 +216,8 @@ function postNewWine(wine) {
   })
   .done(data => {
     console.log(data)
+    review.wine_id = data._id;
+    postNewReview(review);
   })
   .fail(err => {
     console.log(err)
@@ -224,7 +227,7 @@ function postNewWine(wine) {
 function postNewReview(review) {
   let token = localStorage.getItem("authToken");
   $.ajax({
-    url: '/data/wines',
+    url: '/data/reviews',
     type: 'POST',
     data: JSON.stringify(review),
     headers: {
