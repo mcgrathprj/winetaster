@@ -18,16 +18,32 @@
         <h2>Welcome to Wine Taster!</h2>
         <h3>Rate and Learn about Wines</h3>
         <fieldset>
-          <form class="js-login-form">
-            <label for="username">User Name</label><br>
-            <input type="text" name="username"><br>
-            <label for="password">Password</label><br>
-            <input type="text" name="password"><br><br>
-            <button type="submit" class="login">Current Users, Sign In</button><br><br>
-            <p class="new-account"><a href="#">Not Registered? Click Here To Create a Free Account</a></p>
-          </form>
-        </fieldset>
-      </div>
+        <form class="js-login-form">
+          <label for="username">User Name</label><br>
+          <input type="text" name="username"><br>
+          <label for="password">Password</label><br>
+          <input type="text" name="password"><br><br>
+          <button type="submit" class="login">Current Users, Sign In</button><br><br>
+          <a href="#" id="new-account">Click Here To Create a Free Account</a>
+        </form>
+      </fieldset>
+    </div>
+        <div class="row">
+      <fieldset>
+        <form class="js-create-account-form">
+          <label for="firstName">First Name</label><br>
+          <input type="text" name="firstName"><br><br>
+          <label for="lastName">Last Name</label><br>
+          <input type="text" name="lastName"><br><br>
+          <label for="requestedUsername">Requested User Name</label><br>
+          <input type="text" name="requestedUsername"><br>
+          <label for="requestedPassword">Password</label><br>
+          <input type="text" name="requestedPassword"><br><br>
+          <label for="reeneteredPassword">Re-Enter Password</label><br>
+          <input type="text" name="reeneteredPassword"><br><br>
+          <button type="submit" class="create-account">Create Account</button><br>
+        </form>
+      </fieldset>
     </div>
     <div class="row">
       <div class="js-home-screen"></div>
@@ -59,6 +75,9 @@
     </div>
     <div class="row">
       <div class="js-submit-status"></div>
+    </div>
+    <div class="row">
+      <div class="js-errors-area"></div>
     </div>
     <div class="row">
       <div class="js-list-of-wines"></div>

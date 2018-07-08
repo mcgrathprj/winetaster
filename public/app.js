@@ -20,8 +20,8 @@ var MOCK_WINES = [
     varietal: "Cabernet Sauvignon",
     region: "Paso Robles",
     country: "United States"
-    },
-    {
+  },
+  {
     wine_id: "000003",
     publishedAt: "1527341572",
     username: "peter",
@@ -51,7 +51,7 @@ var MOCK_REVIEWS = [
       publishedAt: "1527341306",
       title: "What a great Paso Robles Cab!",
       text: "Omnium pertinacia constituam ex usu, reque oblique ex usu, te fastidii volutpat voluptatum sea. Tollit partem nec et, omnes salutatus maiestatis mea te. Docendi intellegam ne vix, nisl equidem gloriatur an eum, exerci scaevola gubergren pri id. Diam graeci inciderint est ea. Ex vix stet animal, ei quem splendide vim, ullum altera his ex." 
-        },
+    },
     {
       review_id: "000003",
       wine_id: "000003",
@@ -60,7 +60,7 @@ var MOCK_REVIEWS = [
       rating: "4",
       title: "Pretty good for a white",
       text: "His no moderatius disputationi, ut ubique nonumes pro. Ex clita dicant accusam vim, eos ut facer elitr tollit. Hinc animal option eu eos, mutat regione delenit an sed. In accusam adipisci mel. Ut quo cibo sanctus meliore. Ea mollis elaboraret vis, bonorum recusabo duo in. Vis at laboramus expetendis."
-        },
+    },
     {
       review_id: "000004",
       wine_id: "000003",
@@ -75,14 +75,82 @@ var MOCK_REVIEWS = [
 function listenforLogin() {
   $(".js-login-form").submit (event => {
     event.preventDefault();
-    loadHomeScreen();
+    //loadHomeScreen();
+    const existingUser = {
+      username: $("input[name='username']").val(),
+      password: $("input[name='password']").val()
+    }
+
+    logInUser(existingUser);
+
   })
 }
 
-function newUser() {
-  
+function logInUser(user) {
+  let password = user.password; 
+  let username = user.username;
+  $.ajax({
+    url: "api/auth/login",
+    type: "POST",
+    data: JSON.stringify(user),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+  .done(token => {
+    localStorage.setItem("authToken", token.authToken);
+    localStorage.setItem("username", username);
+    loadHomeScreen();
+  })
+  .fail(function (err) {
+    console.log(err);
+    if (err.status === 401) {
+      $('.errors-area').html('Username and/or password incorrect');
+    }
+  });  
 }
 
+$("#new-account").click(event => {
+  event.preventDefault();
+  $(".js-login-form").css("display", "none");
+  $(".js-create-account-form").css("display", "block")
+})
+
+$(".js-create-account-form").submit(event => {
+  event.preventDefault();
+  var newUser = {
+    username: $("input[name='requestedUsername']").val(),
+    firstName: $("input[name='firstName']").val(),
+    lastName: $("input[name='lastName']").val(),
+    password: $("input[name='requestedPassword']").val()
+  }
+  postNewUser(newUser) 
+})
+
+function postNewUser(user) {
+  let username = user.username;
+  let password = user.password;
+  $.ajax({
+    url: "/api/users",
+    type: "post",
+    data: JSON.stringify(user),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+  .done(function (data) {
+    $(".js-login-form").show();  
+    $(".js-create-account-form").hide();    
+  })
+  .fail(function (err) {
+    if (password.length < 10) {
+      $(".errors-area").html("<h2>Password must be at least 10 characters.</h2>")
+    }
+    if (err.responseJSON.location === "username") {
+      $(".errors-area").html(`<h2>${err.responseJSON.message}. Please try a different username.</h2>`)
+    }
+  })
+}
 
 function loadHomeScreen() {
   $(".login-page").css("display","none"); 
@@ -106,7 +174,7 @@ function loadAddScreen() {
   $(".js-add-new-wine-form").submit(event => {
     event.preventDefault();
     var newWineEntry = {
-      wine: $("input[name='wine-name']").val(),
+      name: $("input[name='wine-name']").val(),
       year: $("input[name='wine-year']").val(),
       varietal: $("input[name='wine-varietal']").val(),
       region: $("input[name='wine-region']").val(),
@@ -118,8 +186,8 @@ function loadAddScreen() {
       text: $("input[name='wine-review']" ).val()
     };
 
-    MOCK_REVIEWS.push(newWineReview);
-    MOCK_WINES.push(newWineEntry);
+    postNewWine(newWineEntry, newWineReview);
+
     $(".js-add-new-wine").css("display","none");
     $(".js-submit-status").css("display","block");
     $(".js-submit-status").html(
@@ -130,8 +198,51 @@ function loadAddScreen() {
       <p>Review: ${newWineReview.text}</p>
       <button onclick="loadHomeScreen()">Back to Home Screen</button>
       `
-      )
+    )
   })
+
+function postNewWine(wine, review) {
+  let token = localStorage.getItem("authToken");
+  let username = localStorage.getItem("username");
+  wine.username = username;
+  review.username = username;
+  $.ajax({
+    url: '/data/wines',
+    type: 'POST',
+    data: JSON.stringify(wine),
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token
+    }
+  })
+  .done(data => {
+    console.log(data)
+    review.wine_id = data._id;
+    postNewReview(review);
+  })
+  .fail(err => {
+    console.log(err)
+  })
+}
+
+function postNewReview(review) {
+  let token = localStorage.getItem("authToken");
+  $.ajax({
+    url: '/data/reviews',
+    type: 'POST',
+    data: JSON.stringify(review),
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token
+    }
+  })
+  .done(data => {
+    console.log(data)
+  })
+  .fail(err => {
+    console.log(err)
+  })
+}
 
 
 function displayRecentReviews(data) {
