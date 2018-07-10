@@ -28,6 +28,14 @@ legend {
   margin-right: auto;
 }
 
+.new-account-page {
+  background-color: white;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
 h2 {
   padding-top: 20px;
 }
