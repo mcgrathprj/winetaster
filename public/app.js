@@ -72,6 +72,12 @@ var MOCK_REVIEWS = [
     }
 ]
 
+$(".back").click(() => {
+  $(".js-home-screen").show();
+  $(".js-options").hide();
+  $(".back").hide()
+})
+
 function listenforLogin() {
   $(".js-login-form").submit (event => {
     event.preventDefault();
@@ -155,12 +161,13 @@ function postNewUser(user) {
 function loadHomeScreen() {
   $(".login-page").hide(); 
   $("body").css("background-image","none"); 
+  $(".back").hide();
   $(".js-home-screen").show();
   $(".js-submit-status").hide();
   $(".js-home-screen").html(
     `
     <a href="#" onclick="loadAddScreen()">Add a New Wine</a><br>
-    <a href="#" onclick="displayRecentReviews(MOCK_REVIEWS)">See Recent Reviews</a><br>
+    <a href="#" onclick="getRecentReviews(displayRecentReviews)">See Recent Reviews</a><br>
     <a href="#" onclick="browseWines(MOCK_WINES)">Browse Wines</a>
     `
   )
@@ -246,7 +253,6 @@ function postNewReview(review) {
 
 function getRecentReviews(callback) {
   let token = localStorage.getItem('authToken');
-  let username = localStorage.getItem('username');
   $.ajax({
     url: '/data/reviews',
     type: 'GET',
@@ -256,15 +262,15 @@ function getRecentReviews(callback) {
     dataType: 'JSON' 
   })
   .done(data => {
-   callback(data); 
-    })
+    callback(data); 
+  })
   .fail(function (err) {
     console.error(err);
   })
 }
 
-
 function displayRecentReviews(data) {
+  $(".back").show();
   $(".js-home-screen").hide();
   for (let i = 0; i < data.length; i++) {
     $(".js-recent-reviews").append(`<p><a href="#" onclick="displayFullReview(${data[i].wine_id})">${data[i].title}</a></p>`);

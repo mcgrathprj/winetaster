@@ -30,6 +30,17 @@ router.get('/wines', (req, res) => {
     });
 });
 
+router.get('/wines/:id', (req, res) => {
+  Wine
+    .findById(req.params.id)
+    .then(wine => {
+      res.status(200).json(wine)
+    })
+    .catch(err=> {
+      res.status(500).json({message: "Internal Server Error"});
+    });
+});
+
 router.get('/reviews', (req, res) => {
   Review
     .find()
@@ -40,6 +51,18 @@ router.get('/reviews', (req, res) => {
       res.status(500).json({message: "Internal Server Error"});
     });
 });
+
+router.get('/reviews/:id', (req, res) => {
+  Wine
+    .findById(req.params.id)
+    .then(review => {
+      res.status(200).json(review)
+    })
+    .catch(err=> {
+      res.status(500).json({message: "Internal Server Error"});
+    });
+});
+
 
 router.post('/wines', (req, res) => {
   const requiredFields = ['name', 'username'];
