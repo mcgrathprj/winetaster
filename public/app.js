@@ -244,6 +244,25 @@ function postNewReview(review) {
   })
 }
 
+function getRecentReviews(callback) {
+  let token = localStorage.getItem('authToken');
+  let username = localStorage.getItem('username');
+  $.ajax({
+    url: '/data/reviews',
+    type: 'GET',
+    headers: {
+      "Authorization": 'Bearer ' + token
+    },
+    dataType: 'JSON' 
+  })
+  .done(data => {
+   callback(data); 
+    })
+  .fail(function (err) {
+    console.error(err);
+  })
+}
+
 
 function displayRecentReviews(data) {
   $(".js-home-screen").hide();
