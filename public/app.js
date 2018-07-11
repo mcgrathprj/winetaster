@@ -273,9 +273,29 @@ function displayRecentReviews(data) {
   $(".back").show();
   $(".js-home-screen").hide();
   for (let i = 0; i < data.length; i++) {
-    $(".js-recent-reviews").append(`<p><a href="#" onclick="displayFullReview(${data[i].wine_id})">${data[i].title}</a></p>`);
+    $(".js-recent-reviews").append(`<p><a href="#" onclick="displayFullReview()">${data[i].title}</a></p>`);
   }
 }
+
+display getFullReview(callback, id) {
+  let token = localStorage.getItem('authToken');
+  $.ajax({
+    url: 'data/review/' + id,
+    type: "GET",
+    headers: {
+      "Authorization": 'Bearer ' + token
+    },
+    dataType: 'JSON'
+  })
+  .done(data => {
+    callback(data);
+  })
+  .fail(function (err) {
+    console.log(err);
+  })
+}
+
+
 
 function displayFullReview(wineID) {
   $(".js-list-of-wines").empty();
