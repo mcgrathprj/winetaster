@@ -112,8 +112,8 @@ function logInUser(user) {
 
 $("#new-account").click(event => {
   event.preventDefault();
-  $(".js-login-form").css("display", "none");
-  $(".js-create-account-form").css("display", "block")
+  $(".js-login-form").hide();
+  $(".js-create-account-form").show()
 })
 
 $(".js-create-account-form").submit(event => {
@@ -153,10 +153,10 @@ function postNewUser(user) {
 }
 
 function loadHomeScreen() {
-  $(".login-page").css("display","none"); 
+  $(".login-page").hide(); 
   $("body").css("background-image","none"); 
-  $(".js-home-screen").css("display","block");
-  $(".js-submit-status").css("display", "none");
+  $(".js-home-screen").show();
+  $(".js-submit-status").hide();
   $(".js-home-screen").html(
     `
     <a href="#" onclick="loadAddScreen()">Add a New Wine</a><br>
@@ -167,8 +167,8 @@ function loadHomeScreen() {
 }
 
 function loadAddScreen() {
-  $(".js-home-screen").css("display","none");
-  $(".js-add-new-wine").css("display","block")
+  $(".js-home-screen").hide();
+  $(".js-add-new-wine").show()
 }
 
   $(".js-add-new-wine-form").submit(event => {
@@ -188,8 +188,8 @@ function loadAddScreen() {
 
     postNewWine(newWineEntry, newWineReview);
 
-    $(".js-add-new-wine").css("display","none");
-    $(".js-submit-status").css("display","block");
+    $(".js-add-new-wine").hide();
+    $(".js-submit-status").show();
     $(".js-submit-status").html(
       `
       <p>Your review of ${newWineEntry.wine} has been submitted.</p>
@@ -246,7 +246,7 @@ function postNewReview(review) {
 
 
 function displayRecentReviews(data) {
-  $(".js-home-screen").css("display","none");
+  $(".js-home-screen").hide();
   for (let i = 0; i < data.length; i++) {
     $(".js-recent-reviews").append(`<p><a href="#" onclick="displayFullReview(${data[i].wine_id})">${data[i].title}</a></p>`);
   }
@@ -265,7 +265,7 @@ function displayFullReview(wineID) {
 }
 
 function browseWines(data) {
-  $(".js-home-screen").css("display","none");
+  $(".js-home-screen").hide();
   for (let i = 0; i < data.length; i++) {
     $(".js-list-of-wines").append(`<p><a href="#" onclick="displayFullReview('${data[i].wine_id}')">${data[i].year} ${data[i].wine}</a></p>`);
   }
