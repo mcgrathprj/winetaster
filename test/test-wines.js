@@ -129,5 +129,31 @@ describe('/data/wine', function () {
         expect(res).to.have.status(204);
         });
       })
+
+  describe ('/data/wines/:id GET', function() {
+      it ('should get a single wine object', function() {
+        return Wine.create (
+          {
+            username,
+            name,
+            year,
+            varietal,
+            country,
+            region
+          }
+        )
+        .then(() => chai.request(app).get('/data/wines'))
+        .then(function(res) {
+          let id = res.body[0]._id;
+        return chai.request(app)
+        .get(`/data/wines/${id}`);
+        })
+      .then(function(res) {
+        expect(res).to.have.status(200);
+        expect(res.body).to.be.an('object');
+        expect(res.body).to.have.length(1);
+        });
+      })
+
     })
 });
