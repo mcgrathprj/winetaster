@@ -277,7 +277,7 @@ function displayRecentReviews(data) {
   }
 }
 
-display getFullReview(callback, id) {
+function getFullReview(callback, id) {
   let token = localStorage.getItem('authToken');
   $.ajax({
     url: 'data/review/' + id,
@@ -295,8 +295,6 @@ display getFullReview(callback, id) {
   })
 }
 
-
-
 function displayFullReview(wineID) {
   $(".js-list-of-wines").empty();
   $(".js-recent-reviews").empty();
@@ -308,6 +306,15 @@ function displayFullReview(wineID) {
     $(".js-full-review").append(`<h3>${currentReviews[i].title}</h3><p>${currentReviews[i].text}</p>`);
     }
 }
+
+function deleteReview(reviewID) {
+
+}
+
+function editReview(reviewID) {
+
+}
+
 
 function browseWines(data) {
   $(".js-home-screen").hide();
