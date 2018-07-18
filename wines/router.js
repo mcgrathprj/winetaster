@@ -53,7 +53,7 @@ router.get('/reviews', (req, res) => {
 });
 
 router.get('/reviews/:id', (req, res) => {
-  Wine
+  Review
     .findById(req.params.id)
     .then(review => {
       res.status(200).json(review)

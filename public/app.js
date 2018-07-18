@@ -273,38 +273,49 @@ function displayRecentReviews(data) {
   $(".back").show();
   $(".js-home-screen").hide();
   for (let i = 0; i < data.length; i++) {
-    $(".js-recent-reviews").append(`<p><a href="#" onclick="displayFullReview()">${data[i].title}</a></p>`);
+    $(".js-recent-reviews").append(`<p><a class="wine-item" href="#" data="${data[i]._id}">${data[i].title}</a></p>`);
   }
 }
 
 function getFullReview(callback, id) {
   let token = localStorage.getItem('authToken');
   $.ajax({
-    url: 'data/review/' + id,
+    url: 'data/reviews/' + id,
     type: "GET",
     headers: {
       "Authorization": 'Bearer ' + token
     },
     dataType: 'JSON'
   })
-  .done(data => {
-    callback(data);
+  .done(reviewData => {
+    let wine_id = reviewData.wine_id;
+    $.ajax({
+      url: 'data/wines/' + wine_id,
+      type: "GET",
+      headers: {
+        "Authorization": 'Bearer ' + token
+      },
+      dataType: 'JSON'
+    })
+    .done(wineData => {
+      callback(wineData, reviewData);
+    })
   })
   .fail(function (err) {
     console.log(err);
   })
 }
 
-function displayFullReview(wineID) {
+$(".js-recent-reviews").on("click", ".wine-item", function(){
+  let id = $(this).attr("data"); 
+  getFullReview(displayFullReview, id)
+})
+
+function displayFullReview(thisWine, thisReview) {
+  console.log(thisWine.name);
   $(".js-list-of-wines").empty();
   $(".js-recent-reviews").empty();
-  let thisWine = MOCK_WINES.filter((element) => element.wine_id == wineID);
-  let currentReviews = MOCK_REVIEWS.filter((element) => element.wine_id == wineID);
-  console.log(currentReviews);
-  $(".js-full-review").html(`<h2>${thisWine[0].wine}</h2><p>Year: ${thisWine[0].year}</p><p>${thisWine[0].country}: ${thisWine[0].region}</p>`);
-  for (let i = 0; i < currentReviews.length; i++) {
-    $(".js-full-review").append(`<h3>${currentReviews[i].title}</h3><p>${currentReviews[i].text}</p>`);
-    }
+  $(".js-full-review").html(`<h2>${thisReview.title}</h2><p>${thisReview.text}</p><p>${thisReview.rating}</p>`);
 }
 
 function deleteReview(reviewID) {
