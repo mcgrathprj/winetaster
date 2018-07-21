@@ -335,6 +335,22 @@ $(".js-full-review").on("click", ".delete", function(){
   deleteFullReview(id);
 })
 
+$(".js-full-review").on("click", ".edit", function(){
+  let id = $(this).attr("data");
+  let headline =  $(this).prev().prev().prev().text();
+  let text = $(this).prev().prev().text();
+  let rating = $(this).prev().text();
+  editFullReview(id, headline, text, rating);
+})
+
+function editFullReview(id, headline, text, rating) {
+  $(".js-edit-review").html(
+    `<form class="edit-review">
+
+    </form>`
+  )
+}
+
 function displayFullReview(thisWine, thisReview) {
   console.log(thisReview._id);
   let currentUser = localStorage.getItem("username");
@@ -344,19 +360,12 @@ function displayFullReview(thisWine, thisReview) {
     <p>${thisReview.text}</p><p>Rating: ${thisReview.rating}</p>`)
   if (currentUser === thisReview.username) {
     $(".js-full-review").append(`<button data="${thisReview._id}" class="delete">Delete</button>
-    <button>Edit</button>`);
+    <button data="${thisReview._id}" class="edit">Edit</button>`);
   }
   $(".js-full-review").append(`<br><button onclick="loadHomeScreen()">Back to Home Screen</button>`)
 }
 
-function deleteReview(reviewID) {
-//need to sort out logic around whether i am authorized to delete the review -- ie, user id for review matches my user id
-//need to handle delete call
-//need to present next step -- confirmation, what page to bring the user to, etc. 
-}
-
 function editReview(reviewID) {
-//need to sort out logic around whether i am authorized to delete the review -- ie, user id for review matches my user id
 //need to present form that allows user to edit fields
 //need to handle put call
 //need to present next step -- confirmation, reload edited page?
