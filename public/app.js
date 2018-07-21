@@ -306,24 +306,56 @@ function getFullReview(callback, id) {
   })
 }
 
+function deleteFullReview(id) {
+  let token = localStorage.getItem('authToken');
+  $.ajax({
+    url: 'data/reviews/' + id,
+    type: "DELETE",
+    headers: {
+      "Authorization": 'Bearer ' + token
+    },
+    dataType: 'JSON'
+  })
+  .done(() => {
+    loadHomeScreen();
+  })
+  .fail(function (err) {
+    console.log(err);
+  })
+}
+
+
 $(".js-recent-reviews").on("click", ".wine-item", function(){
   let id = $(this).attr("data"); 
   getFullReview(displayFullReview, id)
 })
 
+$(".js-full-review").on("click", ".delete", function(){
+  let id = $(this).attr("data"); 
+  deleteFullReview(id);
+})
+
 function displayFullReview(thisWine, thisReview) {
-  console.log(thisWine.name);
+  console.log(thisReview._id);
   $(".js-list-of-wines").empty();
   $(".js-recent-reviews").empty();
-  $(".js-full-review").html(`<h2>${thisReview.title}</h2><p>${thisReview.text}</p><p>${thisReview.rating}</p>`);
+  $(".js-full-review").html(`<h1>${thisWine.name}</h1><h2>${thisReview.title}</h2>
+    <p>${thisReview.text}</p><p>Rating: ${thisReview.rating}</p><button data="${thisReview._id}" class="delete">Delete</button>
+    <button>Edit</button>`);
+  $(".js-full-review").append(`<br><button onclick="loadHomeScreen()">Back to Home Screen</button>`)
 }
 
 function deleteReview(reviewID) {
-
+//need to sort out logic around whether i am authorized to delete the review -- ie, user id for review matches my user id
+//need to handle delete call
+//need to present next step -- confirmation, what page to bring the user to, etc. 
 }
 
 function editReview(reviewID) {
-
+//need to sort out logic around whether i am authorized to delete the review -- ie, user id for review matches my user id
+//need to present form that allows user to edit fields
+//need to handle put call
+//need to present next step -- confirmation, reload edited page?
 }
 
 
