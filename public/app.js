@@ -337,11 +337,15 @@ $(".js-full-review").on("click", ".delete", function(){
 
 function displayFullReview(thisWine, thisReview) {
   console.log(thisReview._id);
+  let currentUser = localStorage.getItem("username");
   $(".js-list-of-wines").empty();
   $(".js-recent-reviews").empty();
   $(".js-full-review").html(`<h1>${thisWine.name}</h1><h2>${thisReview.title}</h2>
-    <p>${thisReview.text}</p><p>Rating: ${thisReview.rating}</p><button data="${thisReview._id}" class="delete">Delete</button>
+    <p>${thisReview.text}</p><p>Rating: ${thisReview.rating}</p>`)
+  if (currentUser === thisReview.username) {
+    $(".js-full-review").append(`<button data="${thisReview._id}" class="delete">Delete</button>
     <button>Edit</button>`);
+  }
   $(".js-full-review").append(`<br><button onclick="loadHomeScreen()">Back to Home Screen</button>`)
 }
 
