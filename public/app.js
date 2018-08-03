@@ -1,6 +1,5 @@
 'use strict'; 
 
-
 $(".back").click(() => {
   $(".js-home-screen").show();
   $(".js-options").hide();
@@ -274,9 +273,17 @@ $(".js-full-review").on("click", ".edit", function(){
 
 function editFullReview(id, headline, text, rating) {
   $(".js-edit-review").html(
-    `<form class="edit-review">
-
-    </form>`
+    `<fieldset>
+      <form class="edit-review">
+        <label for="wine-rating">Score</label><br>
+        <input type="text" name="wine-rating"><br><br>
+        <label for="headline">Headline</label><br>          
+        <input type="text" name="headline"><br><br>
+        <label for="wine-review">Review</label><br>          
+        <input type="text" name="wine-review"><br><br>
+        <button type="submit" class="edit-review">Submit</button><br><br>
+     </form>
+    </fieldset>`
   )
 }
 
