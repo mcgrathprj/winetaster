@@ -234,6 +234,26 @@ function getFullReview(callback, id) {
   })
 }
 
+function getReviewByID(callback, id) {
+   let token = localStorage.getItem('authToken');
+  $.ajax({
+    url: 'data/reviews/' + id,
+    type: "GET",
+    headers: {
+      "Authorization": 'Bearer ' + token
+    },
+    dataType: 'JSON'
+  })
+  .done(reviewData => {
+    callback(reviewData)
+  })
+  .fail(function (err) {
+    console.log(err);
+  })
+}
+
+
+
 function deleteFullReview(id) {
   let token = localStorage.getItem('authToken');
   $.ajax({
@@ -265,22 +285,20 @@ $(".js-full-review").on("click", ".delete", function(){
 
 $(".js-full-review").on("click", ".edit", function(){
   let id = $(this).attr("data");
-  let headline =  $(this).prev().prev().prev().text();
-  let text = $(this).prev().prev().text();
-  let rating = $(this).prev().text();
-  editFullReview(id, headline, text, rating);
+  getReviewByID(editFullReview, id)
 })
 
-function editFullReview(id, headline, text, rating) {
+function editFullReview(review) {
+  debugger
   $(".js-edit-review").html(
     `<fieldset>
       <form class="edit-review">
         <label for="wine-rating">Score</label><br>
-        <input type="text" name="wine-rating"><br><br>
+        <input type="text" name="wine-rating" value="${review.rating}"><br><br>
         <label for="headline">Headline</label><br>          
-        <input type="text" name="headline"><br><br>
+        <input type="text" name="headline" value="${review.title}"><br><br>
         <label for="wine-review">Review</label><br>          
-        <input type="text" name="wine-review"><br><br>
+        <input type="text" name="wine-review" value="${review.text}"><br><br>
         <button type="submit" class="edit-review">Submit</button><br><br>
      </form>
     </fieldset>`
