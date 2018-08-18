@@ -1,11 +1,5 @@
 'use strict'; 
 
-//   $(".back").click(() => {
-//   $(".js-home-screen").show();
-//   $(".js-options").hide();
-//   $(".back").hide()
-// })
-
 function listenforLogin() {
   $(".js-login-form").submit (event => {
     event.preventDefault();
@@ -88,21 +82,12 @@ function postNewUser(user) {
 
 function loadHomeScreen() {
   $(".login-page").hide(); 
-//  $("body").css("background-image","none"); 
-  $(".back").hide();
-  $(".js-home-screen").show();
-  $(".js-submit-status").hide();
-  $(".js-home-screen").html(
-    `
-    <a href="#" onclick="loadAddScreen()">Add a New Wine</a><br>
-    <a href="#" onclick="getRecentReviews(displayRecentReviews)">See Recent Reviews</a><br>
-    <a href="#" onclick="browseWines(displayAllWines)">Browse Wines</a>
-    `
-  )
+  $(".home-screen").show();
+  $(".js-submit-status").hide()
 }
 
 function loadAddScreen() {
-  $(".js-home-screen").hide();
+  $(".home-screen").hide();
   $(".js-add-new-wine").show()
 }
 
@@ -199,7 +184,7 @@ function getRecentReviews(callback) {
 
 function displayRecentReviews(data) {
   $(".back").show();
-  $(".js-home-screen").hide();
+  $(".home-screen").hide();
   for (let i = 0; i < data.length; i++) {
     $(".js-recent-reviews").append(`<p><a class="wine-item" href="#" data="${data[i]._id}">${data[i].title}</a></p>`);
   }
@@ -319,15 +304,8 @@ function displayFullReview(thisWine, thisReview) {
   $(".js-full-review").append(`<br><button onclick="loadHomeScreen()">Back to Home Screen</button>`)
 }
 
-function editReview(reviewID) {
-//need to present form that allows user to edit fields
-//need to handle put call
-//need to present next step -- confirmation, reload edited page?
-}
-
-
 function browseWines(data) {
-  $(".js-home-screen").hide();
+  $(".home-screen").hide();
   for (let i = 0; i < data.length; i++) {
     $(".js-list-of-wines").append(`<p><a href="#" onclick="displayFullReview('${data[i].wine_id}')">${data[i].year} ${data[i].wine}</a></p>`);
   }

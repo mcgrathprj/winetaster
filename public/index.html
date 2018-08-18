@@ -10,7 +10,7 @@
 </head>
 <body>
   <nav>
-    <button class="back"><a href="#" onclick="loadHomeScreen()">Go Back</a></button><br>
+    <button class="back"><a href="#" onclick="loadHomeScreen()">Wine Taster</a></button><br>
   </nav>
   <header role="banner">
     <h1>Wine Taster</h1>
@@ -50,7 +50,13 @@
     </div>
     <div class="row">
       <div class="block-item">
-        <div class="js-home-screen"></div>
+        <div class="home-screen">
+          <ul>
+            <li><a href="#" onclick="loadAddScreen()">Add a New Wine</a></li>
+            <li><a href="#" onclick="getRecentReviews(displayRecentReviews)">See Recent Reviews</a></li>
+            <li><a href="#" onclick="browseWines(displayAllWines)">Browse Wines</a></li>
+          </ul>
+        </div>
       </div>  
     </div>
     <div class="row">
