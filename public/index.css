@@ -1,15 +1,20 @@
 body {
   font-family: 'Fira Sans', sans-serif;
   height: 100%; 
-  background-image: url("cheers-.jpg");
+  background-image: url("glasses.jpg");
 }
 header, h2, h3, form {
   text-align: center;
 }
 
+header {
+  color: #FFFFFF
+}
+
 .back {
   float: left;
   margin-left: 30px;
+  color: #FFFFFF
 }
 
 fieldset {
@@ -25,28 +30,25 @@ legend {
   margin-top: 25px;
 }
 
-.login-page {
+.block-item {
   display: block; 
   background-color: white;
   max-width: 400px;
   margin-left: auto;
   margin-right: auto;
+  border-radius: 12px
 }
 
-.new-account-page {
+/* .new-account-page {
   background-color: white;
   max-width: 400px;
   margin-left: auto;
   margin-right: auto;
-}
+} */
 
 
 h2 {
   padding-top: 20px;
-}
-
-label, input {
-  font-size: 150%;
 }
 
 button {
@@ -54,6 +56,7 @@ button {
   border: 5px solid #04befe;
   margin-left: auto;
   margin-right: auto;
+  border-radius: 6pt;
 }
 
 input {

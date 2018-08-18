@@ -88,7 +88,7 @@ function postNewUser(user) {
 
 function loadHomeScreen() {
   $(".login-page").hide(); 
-  $("body").css("background-image","none"); 
+//  $("body").css("background-image","none"); 
   $(".back").hide();
   $(".js-home-screen").show();
   $(".js-submit-status").hide();
