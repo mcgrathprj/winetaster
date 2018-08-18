@@ -1,10 +1,10 @@
 'use strict'; 
 
-$(".back").click(() => {
-  $(".js-home-screen").show();
-  $(".js-options").hide();
-  $(".back").hide()
-})
+//   $(".back").click(() => {
+//   $(".js-home-screen").show();
+//   $(".js-options").hide();
+//   $(".back").hide()
+// })
 
 function listenforLogin() {
   $(".js-login-form").submit (event => {

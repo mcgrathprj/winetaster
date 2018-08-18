@@ -3,6 +3,7 @@ body {
   height: 100%; 
   background-image: url("glasses.jpg");
 }
+
 header, h2, h3, form {
   text-align: center;
 }
@@ -37,6 +38,10 @@ legend {
   margin-left: auto;
   margin-right: auto;
   border-radius: 12px
+}
+
+.js-home-screen {
+  padding: 
 }
 
 /* .new-account-page {

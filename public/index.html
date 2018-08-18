@@ -9,8 +9,10 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
+  <nav>
+    <button class="back"><a href="#" onclick="loadHomeScreen()">Go Back</a></button><br>
+  </nav>
   <header role="banner">
-    <h3 class="back"><a href="#" onclick="loadHomeScreen()">Go Back</a></h3>
     <h1>Wine Taster</h1>
   </header> 
   <main role="main">
@@ -29,25 +31,27 @@
         </form>
       </fieldset>
     </div>
-      <div class="row">
-        <div class="new-account-page">
-          <fieldset>
-            <form class="js-create-account-form block-item">
-              <label for="firstName">First Name</label><br>
-              <input type="text" name="firstName"><br><br>
-              <label for="lastName">Last Name</label><br>
-              <input type="text" name="lastName"><br><br>
-              <label for="requestedUsername">Requested User Name</label><br>
-              <input type="text" name="requestedUsername"><br>
-              <label for="requestedPassword">Password</label><br>
-              <input type="text" name="requestedPassword"><br><br>
-              <button type="submit" class="create-account">Create Account</button><br>
-            </form>
-          </fieldset>
-        </div>
+    <div class="row">
+      <div class="new-account-page">
+        <fieldset>
+          <form class="js-create-account-form block-item">
+            <label for="firstName">First Name</label><br>
+            <input type="text" name="firstName"><br><br>
+            <label for="lastName">Last Name</label><br>
+            <input type="text" name="lastName"><br><br>
+            <label for="requestedUsername">Requested User Name</label><br>
+            <input type="text" name="requestedUsername"><br>
+            <label for="requestedPassword">Password</label><br>
+            <input type="text" name="requestedPassword"><br><br>
+            <button type="submit" class="create-account">Create Account</button><br>
+          </form>
+        </fieldset>
+      </div>
     </div>
     <div class="row">
-      <div class="js-home-screen block-item"></div>
+      <div class="block-item">
+        <div class="js-home-screen"></div>
+      </div>  
     </div>
     <div class="row">
       <div class="js-add-new-wine">
@@ -76,7 +80,7 @@
     </div>
     <div class="js-options block-item">
       <div class="row">
-        <div class="js-submit-status"></div>
+        <div class="js-submit-status block-item"></div>
       </div>
       <div class="row">
         <div class="js-errors-area"></div>
