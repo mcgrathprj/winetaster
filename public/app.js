@@ -1,7 +1,7 @@
 'use strict'; 
 
 function listenforLogin() {
-  $(".js-login-form").submit (event => {
+  $(".login-form").submit (event => {
     event.preventDefault();
     //loadHomeScreen();
     const existingUser = {
@@ -40,11 +40,11 @@ function logInUser(user) {
 
 $("#new-account").click(event => {
   event.preventDefault();
-  $(".js-login-form").hide();
-  $(".js-create-account-form").show()
+  $(".login-form").hide();
+  $(".create-account-form").show()
 })
 
-$(".js-create-account-form").submit(event => {
+$(".create-account-form").submit(event => {
   event.preventDefault();
   var newUser = {
     username: $("input[name='requestedUsername']").val(),
@@ -67,8 +67,8 @@ function postNewUser(user) {
     }
   })
   .done(function (data) {
-    $(".js-login-form").show();  
-    $(".js-create-account-form").hide();    
+    $(".login-form").show();  
+    $(".create-account-form").hide();    
   })
   .fail(function (err) {
     if (password.length < 10) {
@@ -88,10 +88,10 @@ function loadHomeScreen() {
 
 function loadAddScreen() {
   $(".home-screen").hide();
-  $(".js-add-new-wine").show()
+  $(".add-new-wine").show()
 }
 
-  $(".js-add-new-wine-form").submit(event => {
+  $(".add-new-wine-form").submit(event => {
     event.preventDefault();
     var newWineEntry = {
       name: $("input[name='wine-name']").val(),
@@ -108,7 +108,7 @@ function loadAddScreen() {
 
     postNewWine(newWineEntry, newWineReview);
 
-    $(".js-add-new-wine").hide();
+    $(".add-new-wine").hide();
     $(".js-submit-status").show();
     $(".js-submit-status").html(
       `
