@@ -40,8 +40,18 @@ legend {
   border-radius: 12px;
 }
 
+.create-account-form {
+  padding-top: 10px;
+  padding-bottom: 10px
+}
+
 h2 {
   padding-top: 20px;
+}
+
+.home-options {
+  padding-top: 10px;
+  padding-bottom: 10px
 }
 
 button {
