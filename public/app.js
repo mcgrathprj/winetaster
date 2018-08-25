@@ -123,7 +123,7 @@ $(".add-new-wine-form").submit(event => {
   )
 })
 
-$("#edit-review").submit(event => {
+$(document).on("submit", "#edit-review", event => {
   event.preventDefault();
 
   var updatedWineReview = {
