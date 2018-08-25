@@ -40,7 +40,7 @@ legend {
   border-radius: 12px;
 }
 
-.create-account-form {
+.create-account-form, .add-new-wine, .js-full-review {
   padding-top: 10px;
   padding-bottom: 10px
 }
@@ -62,6 +62,15 @@ button {
   border-radius: 6pt;
 }
 
+.delete {
+  background-color: #ff0000;
+  border: 5px solid #ff0000;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 6pt;
+
+}
+
 input {
   margin-left: auto;
   margin-right: auto;
@@ -80,6 +89,6 @@ a:hover {
   text-decoration: underline;
 }
 
-.add-new-wine, .create-account-form, .home-screen {
+.add-new-wine, .create-account-form, .home-screen, .js-full-review {
   display: none;
 }

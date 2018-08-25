@@ -84,7 +84,8 @@ function loadHomeScreen() {
   $(".home-screen").show();
   $(".js-submit-status").hide();
   $(".js-full-review").hide();
-  $(".js-recent-reviews").hide()
+  $(".js-recent-reviews").hide();
+  $(".add-new-wine").hide()
 }
 
 function loadAddScreen() {
@@ -92,35 +93,61 @@ function loadAddScreen() {
   $(".add-new-wine").show()
 }
 
-  $(".add-new-wine-form").submit(event => {
-    event.preventDefault();
-    var newWineEntry = {
-      name: $("input[name='wine-name']").val(),
-      year: $("input[name='wine-year']").val(),
-      varietal: $("input[name='wine-varietal']").val(),
-      region: $("input[name='wine-region']").val(),
-      country: $("input[name='wine-country']").val(),
-    };
-    var newWineReview = {
-      rating: $("input[name='wine-rating']").val(), 
-      title: $("input[name='headline']").val(),
-      text: $("input[name='wine-review']" ).val()
-    };
+$(".add-new-wine-form").submit(event => {
+  event.preventDefault();
+  var newWineEntry = {
+    name: $("input[name='wine-name']").val(),
+    year: $("input[name='wine-year']").val(),
+    varietal: $("input[name='wine-varietal']").val(),
+    region: $("input[name='wine-region']").val(),
+    country: $("input[name='wine-country']").val(),
+  };
+  var newWineReview = {
+    rating: $("input[name='wine-rating']").val(), 
+    title: $("input[name='headline']").val(),
+    text: $("input[name='wine-review']" ).val()
+  };
 
-    postNewWine(newWineEntry, newWineReview);
+  postNewWine(newWineEntry, newWineReview);
 
-    $(".add-new-wine").hide();
-    $(".js-submit-status").show();
-    $(".js-submit-status").html(
-      `
-      <p>Your review of ${newWineEntry.wine} has been submitted.</p>
-      <p>Rating: ${newWineReview.rating}</p>
-      <p>Headline: ${newWineReview.title}</p>
-      <p>Review: ${newWineReview.text}</p>
-      <button onclick="loadHomeScreen()">Back to Home Screen</button>
-      `
-    )
-  })
+  $(".add-new-wine").hide();
+  $(".js-submit-status").show();
+  $(".js-submit-status").html(
+    `
+    <p>Your review of ${newWineEntry.wine} has been submitted.</p>
+    <p>Rating: ${newWineReview.rating}</p>
+    <p>Headline: ${newWineReview.title}</p>
+    <p>Review: ${newWineReview.text}</p>
+    <button onclick="loadHomeScreen()">Back to Home Screen</button>
+    `
+  )
+})
+
+$("#edit-review").submit(event => {
+  event.preventDefault();
+
+  var updatedWineReview = {
+    rating: $("input[name='wine-rating']").val(), 
+    title: $("input[name='headline']").val(),
+    text: $("input[name='wine-review']" ).val(),
+    _id: $(this).attr("data")
+  };
+
+  putNewReview(updatedWineReview);
+
+  $(".add-new-wine").hide();
+  $(".js-submit-status").show();
+  $(".js-submit-status").html(
+    `
+    <p>Your review has been updated.</p>
+    <p>Rating: ${updatedWineReview.rating}</p>
+    <p>Headline: ${updatedWineReview.title}</p>
+    <p>Review: ${updatedWineReview.text}</p>
+    <button onclick="loadHomeScreen()">Back to Home Screen</button>
+    `
+  )
+})
+
 
 function postNewWine(wine, review) {
   let token = localStorage.getItem("authToken");
@@ -165,6 +192,26 @@ function postNewReview(review) {
   })
 }
 
+function putNewReview(review) {
+  let token = localStorage.getItem("authToken");
+  $.ajax({
+    url: `/data/reviews/${review._id}`,
+    type: 'PUT',
+    data: JSON.stringify(review),
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token
+    }
+  })
+  .done(data => {
+    console.log(data)
+  })
+  .fail(err => {
+    console.log(err)
+  })
+}
+
+
 function getRecentReviews(callback) {
   let token = localStorage.getItem('authToken');
   $.ajax({
@@ -186,6 +233,7 @@ function getRecentReviews(callback) {
 function displayRecentReviews(data) {
   $(".back").show();
   $(".home-screen").hide();
+  $(".js-full-review").hide();
   $(".js-recent-reviews").show();
   $(".js-recent-reviews").empty();
   for (let i = 0; i < data.length; i++) {
@@ -277,21 +325,22 @@ $(".js-full-review").on("click", ".edit", function(){
 })
 
 function editFullReview(review) {
-  debugger
+  $(".js-full-review").hide();
   $(".js-edit-review").html(
-    `<fieldset>
-      <form class="edit-review">
+    `
+      <form id="edit-review" data="${review._id}">
         <label for="wine-rating">Score</label><br>
-        <input type="text" name="wine-rating" value="${review.rating}"><br><br>
+        <input type="text" name="wine-rating" value="${review.rating}" class="edit-rating"><br><br>
         <label for="headline">Headline</label><br>          
-        <input type="text" name="headline" value="${review.title}"><br><br>
+        <input type="text" name="headline" value="${review.title}" class="edit-title"><br><br>
         <label for="wine-review">Review</label><br>          
-        <input type="text" name="wine-review" value="${review.text}"><br><br>
-        <button type="submit" class="edit-review">Submit</button><br><br>
-     </form>
-    </fieldset>`
+        <input type="text" name="wine-review" value="${review.text}" class=><br><br>
+        <button type="submit">Submit</button><br><br>
+     </form>`
   )
 }
+
+
 
 function displayFullReview(thisWine, thisReview) {
   console.log(thisReview._id);
@@ -305,7 +354,7 @@ function displayFullReview(thisWine, thisReview) {
     $(".js-full-review").append(`<button data="${thisReview._id}" class="delete">Delete</button>
     <button data="${thisReview._id}" class="edit">Edit</button>`);
   }
-  $(".js-full-review").append(`<br><button onclick="loadHomeScreen()">Back to Home Screen</button>`)
+  $(".js-full-review").append(`<br><button onclick="getRecentReviews(displayRecentReviews)">Back to List of Reviews</button>`)
 }
 
 function browseWines(data) {
