@@ -3,7 +3,6 @@
 function listenforLogin() {
   $(".login-form").submit (event => {
     event.preventDefault();
-    //loadHomeScreen();
     const existingUser = {
       username: $("input[name='username']").val(),
       password: $("input[name='password']").val()
@@ -83,7 +82,9 @@ function postNewUser(user) {
 function loadHomeScreen() {
   $(".login-page").hide(); 
   $(".home-screen").show();
-  $(".js-submit-status").hide()
+  $(".js-submit-status").hide();
+  $(".js-full-review").hide();
+  $(".js-recent-reviews").hide()
 }
 
 function loadAddScreen() {
@@ -185,6 +186,8 @@ function getRecentReviews(callback) {
 function displayRecentReviews(data) {
   $(".back").show();
   $(".home-screen").hide();
+  $(".js-recent-reviews").show();
+  $(".js-recent-reviews").empty();
   for (let i = 0; i < data.length; i++) {
     $(".js-recent-reviews").append(`<p><a class="wine-item" href="#" data="${data[i]._id}">${data[i].title}</a></p>`);
   }
@@ -295,6 +298,7 @@ function displayFullReview(thisWine, thisReview) {
   let currentUser = localStorage.getItem("username");
   $(".js-list-of-wines").empty();
   $(".js-recent-reviews").empty();
+  $(".js-full-review").show();
   $(".js-full-review").html(`<h1>${thisWine.name}</h1><h2>${thisReview.title}</h2>
     <p>${thisReview.text}</p><p>Rating: ${thisReview.rating}</p>`)
   if (currentUser === thisReview.username) {
@@ -306,6 +310,7 @@ function displayFullReview(thisWine, thisReview) {
 
 function browseWines(data) {
   $(".home-screen").hide();
+  $(".js-list-of-wines").empty();
   for (let i = 0; i < data.length; i++) {
     $(".js-list-of-wines").append(`<p><a href="#" onclick="displayFullReview('${data[i].wine_id}')">${data[i].year} ${data[i].wine}</a></p>`);
   }
