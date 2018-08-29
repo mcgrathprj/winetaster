@@ -4,7 +4,7 @@ body {
   background-image: url("glasses.jpg");
 }
 
-header, h2, h3, form {
+header, h1, h2, h3, form {
   text-align: center;
 }
 
@@ -43,6 +43,15 @@ legend {
 .create-account-form, .add-new-wine, .js-full-review {
   padding-top: 10px;
   padding-bottom: 10px
+}
+
+.edit-title {
+  width: 250px;
+}
+
+.edit-text {
+  width: 250px;
+  height: 150px;
 }
 
 h2 {

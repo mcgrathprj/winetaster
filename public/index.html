@@ -43,7 +43,7 @@
             <label for="requestedUsername">Requested User Name</label><br>
             <input type="text" name="requestedUsername"><br>
             <label for="requestedPassword">Password</label><br>
-            <input type="text" name="requestedPassword"><br><br>
+            <input type="password" name="requestedPassword"><br><br>
             <button type="submit" class="create-account">Create Account</button><br>
           </form>
         </fieldset>
@@ -100,7 +100,18 @@
       </div>
       <div class="row">
         <div class="js-full-review block-item"></div>
-        <div class="js-edit-review block-item"></div>
+        <div class="js-edit-review block-item">
+          <form id="edit-review">
+            <label for="wine-rating">Score</label><br>
+            <input type="text" name="wine-rating" id="edit-rating"><br><br>
+            <label for="headline">Headline</label><br>          
+            <input type="text" name="headline" id="edit-title"><br><br>
+            <label for="wine-review">Review</label><br>          
+            <input type="text" name="wine-review" id="edit-text"><br><br>
+            <button type="submit">Submit</button><br><br>
+         </form>
+
+        </div>
       </div>
     </div>
   </main>

@@ -126,11 +126,16 @@ $(".add-new-wine-form").submit(event => {
 $(document).on("submit", "#edit-review", event => {
   event.preventDefault();
 
+
+    let rating = $("#edit-rating").val();
+    let title = $("#edit-title").val();
+    let text = $("#edit-text").val();
+    let id = $("#edit-review").attr("data")
   var updatedWineReview = {
-    rating: $("input[name='wine-rating']").val(), 
-    title: $("input[name='headline']").val(),
-    text: $("input[name='wine-review']" ).val(),
-    _id: $(this).attr("data")
+    rating,
+    title,
+    text,
+    id
   };
 
   putNewReview(updatedWineReview);
@@ -195,7 +200,7 @@ function postNewReview(review) {
 function putNewReview(review) {
   let token = localStorage.getItem("authToken");
   $.ajax({
-    url: `/data/reviews/${review._id}`,
+    url: `/data/reviews/${review.id}`,
     type: 'PUT',
     data: JSON.stringify(review),
     headers: {
@@ -288,8 +293,6 @@ function getReviewByID(callback, id) {
   })
 }
 
-
-
 function deleteFullReview(id) {
   let token = localStorage.getItem('authToken');
   $.ajax({
@@ -308,7 +311,6 @@ function deleteFullReview(id) {
   })
 }
 
-
 $(".js-recent-reviews").on("click", ".wine-item", function(){
   let id = $(this).attr("data"); 
   getFullReview(displayFullReview, id)
@@ -326,21 +328,12 @@ $(".js-full-review").on("click", ".edit", function(){
 
 function editFullReview(review) {
   $(".js-full-review").hide();
-  $(".js-edit-review").html(
-    `
-      <form id="edit-review" data="${review._id}">
-        <label for="wine-rating">Score</label><br>
-        <input type="text" name="wine-rating" value="${review.rating}" class="edit-rating"><br><br>
-        <label for="headline">Headline</label><br>          
-        <input type="text" name="headline" value="${review.title}" class="edit-title"><br><br>
-        <label for="wine-review">Review</label><br>          
-        <input type="text" name="wine-review" value="${review.text}" class=><br><br>
-        <button type="submit">Submit</button><br><br>
-     </form>`
-  )
+  $(".js-edit-review").show();
+  $("#edit-rating").val(review.rating);
+  $("#edit-title").val(review.title);
+  $("#edit-text").val(review.text);
+  $("#edit-review").attr("data",review._id)
 }
-
-
 
 function displayFullReview(thisWine, thisReview) {
   console.log(thisReview._id);
