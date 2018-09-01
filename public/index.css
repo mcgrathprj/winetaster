@@ -98,6 +98,6 @@ a:hover {
   text-decoration: underline;
 }
 
-.add-new-wine, .create-account-form, .home-screen, .js-full-review {
+.add-new-wine, .create-account-form, .home-screen, .js-full-review, .edit-review {
   display: none;
 }

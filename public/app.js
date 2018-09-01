@@ -141,6 +141,7 @@ $(document).on("submit", "#edit-review", event => {
   putNewReview(updatedWineReview);
 
   $(".add-new-wine").hide();
+  $(".edit-review").hide();
   $(".js-submit-status").show();
   $(".js-submit-status").html(
     `
@@ -304,7 +305,15 @@ function deleteFullReview(id) {
     dataType: 'JSON'
   })
   .done(() => {
-    loadHomeScreen();
+    $(".js-full-review").hide();
+    $(".js-submit-status").show();
+    $(".js-submit-status").html(
+    `
+    <p>Your review has been deleted.</p>
+    <button onclick="loadHomeScreen()">Back to Home Screen</button>
+    `
+  )
+
   })
   .fail(function (err) {
     console.log(err);
@@ -328,7 +337,7 @@ $(".js-full-review").on("click", ".edit", function(){
 
 function editFullReview(review) {
   $(".js-full-review").hide();
-  $(".js-edit-review").show();
+  $(".edit-review").show();
   $("#edit-rating").val(review.rating);
   $("#edit-title").val(review.title);
   $("#edit-text").val(review.text);
