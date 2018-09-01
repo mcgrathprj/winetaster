@@ -268,21 +268,22 @@ function browseWines(callback) {
 }
 
 function displayAllWines(data) {
+  console.log(data);
   $(".home-screen").hide();
   $(".js-list-of-wines").show();
   $(".js-list-of-wines").empty();
   for (let i = 0; i < data.length; i++) {
-  $(".js-list-of-wines").append(`<p><a href="#" onclick="displayFullWinePageStub()">${data[i].year} ${data[i].name}</a></p>`);
+  $(".js-list-of-wines").append(`<p><a href="#" onclick="getWineByID(displayFullWinePage, '${data[i]._id}')">${data[i].year} ${data[i].name}</a></p>`);
   }
 }
 
-function displayFullWinePageStub() {
-  $(".js-list-of-wines").hide();
-  $(".js-full-wine-page").show();
-  $(".js-full-wine-page").html(
-    `<h2>Full Wine Page Will Go Here</h2>`
-    )
-}
+// function displayFullWinePageStub() {
+//   $(".js-list-of-wines").hide();
+//   $(".js-full-wine-page").show();
+//   $(".js-full-wine-page").html(
+//     `<h2>Full Wine Page Will Go Here</h2>`
+//     )
+// }
 
 function displayFullWinePage(thisWine) {
   console.log(thisWine._id);
