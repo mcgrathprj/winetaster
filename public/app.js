@@ -85,7 +85,8 @@ function loadHomeScreen() {
   $(".js-submit-status").hide();
   $(".js-full-review").hide();
   $(".js-recent-reviews").hide();
-  $(".add-new-wine").hide()
+  $(".add-new-wine").hide();
+  $(".js-list-of-wines").hide()
 }
 
 function loadAddScreen() {
@@ -247,6 +248,42 @@ function displayRecentReviews(data) {
   }
 }
 
+function browseWines(callback) {
+  let token = localStorage.getItem('authToken');
+  $.ajax({
+    url: '/data/wines',
+    type: 'GET',
+    headers: {
+      "Authorization": 'Bearer ' + token
+    },
+    dataType: 'JSON' 
+  })
+  .done(data => {
+    callback(data); 
+  })
+  .fail(function (err) {
+    console.error(err);
+  })
+}
+
+function displayAllWines(data) {
+  $(".home-screen").hide();
+  $(".js-list-of-wines").show();
+  $(".js-list-of-wines").empty();
+  for (let i = 0; i < data.length; i++) {
+  $(".js-list-of-wines").append(`<p><a href="#" onclick="displayFullWinePage()">${data[i].year} ${data[i].name}</a></p>`);
+  }
+}
+
+function displayFullWinePage() {
+  $(".js-list-of-wines").hide();
+  $(".js-full-wine-page").show();
+  $(".js-full-wine-page").html(
+    `<h2>Full Wine Page Will Go Here</h2>`
+    )
+}
+
+
 function getFullReview(callback, id) {
   let token = localStorage.getItem('authToken');
   $.ajax({
@@ -293,6 +330,25 @@ function getReviewByID(callback, id) {
     console.log(err);
   })
 }
+
+function getWineByID(callback, id) {
+   let token = localStorage.getItem('authToken');
+  $.ajax({
+    url: 'data/wines/' + id,
+    type: "GET",
+    headers: {
+      "Authorization": 'Bearer ' + token
+    },
+    dataType: 'JSON'
+  })
+  .done(wineData => {
+    callback(wineData)
+  })
+  .fail(function (err) {
+    console.log(err);
+  })
+}
+
 
 function deleteFullReview(id) {
   let token = localStorage.getItem('authToken');
@@ -357,14 +413,6 @@ function displayFullReview(thisWine, thisReview) {
     <button data="${thisReview._id}" class="edit">Edit</button>`);
   }
   $(".js-full-review").append(`<br><button onclick="getRecentReviews(displayRecentReviews)">Back to List of Reviews</button>`)
-}
-
-function browseWines(data) {
-  $(".home-screen").hide();
-  $(".js-list-of-wines").empty();
-  for (let i = 0; i < data.length; i++) {
-    $(".js-list-of-wines").append(`<p><a href="#" onclick="displayFullReview('${data[i].wine_id}')">${data[i].year} ${data[i].wine}</a></p>`);
-  }
 }
 
 
