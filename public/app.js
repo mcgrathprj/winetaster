@@ -86,7 +86,8 @@ function loadHomeScreen() {
   $(".js-full-review").hide();
   $(".js-recent-reviews").hide();
   $(".add-new-wine").hide();
-  $(".js-list-of-wines").hide()
+  $(".js-list-of-wines").hide();
+  $(".js-full-wine-page").hide()
 }
 
 function loadAddScreen() {
@@ -271,17 +272,33 @@ function displayAllWines(data) {
   $(".js-list-of-wines").show();
   $(".js-list-of-wines").empty();
   for (let i = 0; i < data.length; i++) {
-  $(".js-list-of-wines").append(`<p><a href="#" onclick="displayFullWinePage()">${data[i].year} ${data[i].name}</a></p>`);
+  $(".js-list-of-wines").append(`<p><a href="#" onclick="displayFullWinePageStub()">${data[i].year} ${data[i].name}</a></p>`);
   }
 }
 
-function displayFullWinePage() {
+function displayFullWinePageStub() {
   $(".js-list-of-wines").hide();
   $(".js-full-wine-page").show();
   $(".js-full-wine-page").html(
     `<h2>Full Wine Page Will Go Here</h2>`
     )
 }
+
+function displayFullWinePage(thisWine) {
+  console.log(thisWine._id);
+  let currentUser = localStorage.getItem("username");
+  $(".js-list-of-wines").hide();
+  $(".js-full-wine-page").empty();
+  $(".js-full-wine-page").show();
+  $(".js-full-wine-page").html(`<h1>${thisWine.name}</h1>`)
+  if (currentUser === thisWine.username) {
+    $(".js-full-wine-page").append(`<button data="${thisWine._id}" class="delete">Delete</button>
+    <button data="${thisWine._id}" class="edit">Edit</button>`);
+  }
+  $(".js-full-wine-page").append(`<br><button onclick="browseWines(displayAllWines)">Back to List of Reviews</button>`)
+}
+
+
 
 
 function getFullReview(callback, id) {
