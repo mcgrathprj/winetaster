@@ -385,6 +385,32 @@ function deleteFullReview(id) {
   })
 }
 
+function deleteFullWine(id) {
+  let token = localStorage.getItem('authToken');
+  $.ajax({
+    url: 'data/wines/' + id,
+    type: "DELETE",
+    headers: {
+      "Authorization": 'Bearer ' + token
+    },
+    dataType: 'JSON'
+  })
+  .done(() => {
+    $(".js-full-wine-page").hide();
+    $(".js-submit-status").show();
+    $(".js-submit-status").html(
+    `
+    <p>The wine record has been deleted.</p>
+    <button onclick="loadHomeScreen()">Back to Home Screen</button>
+    `
+  )
+
+  })
+  .fail(function (err) {
+    console.log(err);
+  })
+}
+
 $(".js-recent-reviews").on("click", ".wine-item", function(){
   let id = $(this).attr("data"); 
   getFullReview(displayFullReview, id)
@@ -393,6 +419,11 @@ $(".js-recent-reviews").on("click", ".wine-item", function(){
 $(".js-full-review").on("click", ".delete", function(){
   let id = $(this).attr("data"); 
   deleteFullReview(id);
+})
+
+$(".js-full-wine-page").on("click", ".delete", function(){
+  let id = $(this).attr("data"); 
+  deleteFullWine(id);
 })
 
 $(".js-full-review").on("click", ".edit", function(){
