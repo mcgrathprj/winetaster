@@ -156,6 +156,41 @@ $(document).on("submit", "#edit-review", event => {
   )
 })
 
+$(document).on("submit", "#edit-wine", event => {
+  event.preventDefault();
+
+    let name = $("#edit-name").val();
+    let year = $("#edit-year").val();
+    let country = $("#edit-country").val();
+    let region = $("#edit-region").val();
+    let varietal = $("#edit-varietal").val();
+    let id = $("#edit-review").attr("data")
+  var updatedWine = {
+    name,
+    year,
+    country,
+    region,
+    varietal,
+    id
+  };
+
+  putNewWine(updatedWine);
+
+  $(".add-new-wine").hide();
+  $(".edit-review").hide();
+  $(".js-submit-status").show();
+  $(".js-submit-status").html(
+    `
+    <p>Your entry has been updated.</p>
+    <p>Wine: ${updatedWine.name}</p>
+    <p>Year: ${updatedWine.year}</p>
+    <p>Country: ${updatedWine.country}</p>
+    <p>Region: ${updatedWine.region}<p>
+    <p>Varietal: ${updatedWine.varietal}<p>
+    <button onclick="loadHomeScreen()">Back to Home Screen</button>
+    `
+  )
+})
 
 function postNewWine(wine, review) {
   let token = localStorage.getItem("authToken");
@@ -219,6 +254,24 @@ function putNewReview(review) {
   })
 }
 
+function putNewWine(wine) {
+  let token = localStorage.getItem("authToken");
+  $.ajax({
+    url: `/data/reviews/${review.id}`,
+    type: 'PUT',
+    data: JSON.stringify(review),
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token
+    }
+  })
+  .done(data => {
+    console.log(data)
+  })
+  .fail(err => {
+    console.log(err)
+  })
+}
 
 function getRecentReviews(callback) {
   let token = localStorage.getItem('authToken');
@@ -277,12 +330,16 @@ function displayAllWines(data) {
 }
 
 function displayFullWinePage(thisWine) {
-  console.log(thisWine._id);
+  console.log(thisWine);
   let currentUser = localStorage.getItem("username");
   $(".js-list-of-wines").hide();
   $(".js-full-wine-page").empty();
   $(".js-full-wine-page").show();
-  $(".js-full-wine-page").html(`<h1>${thisWine.name}</h1>`)
+  $(".js-full-wine-page").html(
+    `<h1>${thisWine.year} ${thisWine.name}</h1>
+      <h2>${thisWine.country}: ${thisWine.region}</h2>
+      <h2>${thisWine.varietal}</h2>
+    `)
   if (currentUser === thisWine.username) {
     $(".js-full-wine-page").append(`<button data="${thisWine._id}" class="delete">Delete</button>
     <button data="${thisWine._id}" class="edit">Edit</button>`);
