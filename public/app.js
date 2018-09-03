@@ -164,7 +164,7 @@ $(document).on("submit", "#edit-wine", event => {
     let country = $("#edit-country").val();
     let region = $("#edit-region").val();
     let varietal = $("#edit-varietal").val();
-    let id = $("#edit-review").attr("data")
+    let id = $("#edit-wine").attr("data")
   var updatedWine = {
     name,
     year,
@@ -177,7 +177,7 @@ $(document).on("submit", "#edit-wine", event => {
   putNewWine(updatedWine);
 
   $(".add-new-wine").hide();
-  $(".edit-review").hide();
+  $(".edit-wine").hide();
   $(".js-submit-status").show();
   $(".js-submit-status").html(
     `
@@ -257,9 +257,9 @@ function putNewReview(review) {
 function putNewWine(wine) {
   let token = localStorage.getItem("authToken");
   $.ajax({
-    url: `/data/reviews/${review.id}`,
+    url: `/data/wines/${wine.id}`,
     type: 'PUT',
-    data: JSON.stringify(review),
+    data: JSON.stringify(wine),
     headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + token
@@ -488,6 +488,12 @@ $(".js-full-review").on("click", ".edit", function(){
   getReviewByID(editFullReview, id)
 })
 
+$(".js-full-wine-page").on("click", ".edit", function(){
+  let id = $(this).attr("data");
+  getWineByID(editFullWine, id)
+})
+
+
 function editFullReview(review) {
   $(".js-full-review").hide();
   $(".edit-review").show();
@@ -495,6 +501,17 @@ function editFullReview(review) {
   $("#edit-title").val(review.title);
   $("#edit-text").val(review.text);
   $("#edit-review").attr("data",review._id)
+}
+
+function editFullWine(wine) {
+  $(".js-full-wine-page").hide();
+  $(".edit-wine").show();
+  $("#edit-name").val(wine.name);
+  $("#edit-year").val(wine.year);
+  $("#edit-country").val(wine.country);
+  $("#edit-region").val(wine.region);
+  $("#edit-varietal").val(wine.varietal);
+  $("#edit-wine").attr("data",wine._id)
 }
 
 function displayFullReview(thisWine, thisReview) {
