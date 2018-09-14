@@ -2,6 +2,8 @@ body {
   font-family: 'Fira Sans', sans-serif;
   height: 100%; 
   background-image: url("glasses.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 header, h1, h2, h3, form {
