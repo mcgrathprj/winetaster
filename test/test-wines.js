@@ -89,23 +89,6 @@ describe('/data/wine', function () {
         }) 
       });
   });
-  // describe ('POST /data/wines', function() {
-  //     it('should reject wines with missing wine name', function() {
-  //       let wine = {
-  //         name,
-  //         year,
-  //         varietal,
-  //         country,
-  //         region
-  //       };
-  //       return chai.request(app)
-  //       .post('/data/wines')
-  //       .send(wine)
-  //       .then (res => { 
-  //         expect(res).to.have.status(400)
-  //       })
-  //     })
-  //   })
 
   describe ('/data/wines DELETE', function() {
       it ('should delete items', function() {
@@ -156,4 +139,4 @@ describe('/data/wine', function () {
       })
 
     })
-});
+})
