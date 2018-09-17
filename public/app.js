@@ -86,6 +86,8 @@ function loadHomeScreen() {
   $(".js-full-review").hide();
   $(".js-recent-reviews").hide();
   $(".add-new-wine").hide();
+  $(".edit-review").hide();
+  $(".edit-wine").hide();
   $(".js-list-of-wines").hide();
   $(".js-full-wine-page").hide()
 }
