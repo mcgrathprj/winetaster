@@ -112,7 +112,8 @@ describe('/data/wine', function () {
         expect(res).to.have.status(204);
         });
       })
-
+    });
+  
   describe ('/data/wines/:id GET', function() {
       it ('should get a single wine object', function() {
         return Wine.create (
@@ -137,5 +138,5 @@ describe('/data/wine', function () {
         expect(res.body).to.have.length(1);
         });
       })
-
-    })
+    });
+})
