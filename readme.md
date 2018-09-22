@@ -8,6 +8,8 @@ I wanted to create a site to start to get people interested in understanding win
 
 Repo: https://github.com/mcgrathprj/winetaster
 
+Demo: https://guarded-mesa-36348.herokuapp.com/
+
 Built In: JavaScript, jQuery, Node, CSS, HTML
 
 Screens: 
