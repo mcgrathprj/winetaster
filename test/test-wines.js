@@ -139,4 +139,3 @@ describe('/data/wine', function () {
       })
 
     })
-})
